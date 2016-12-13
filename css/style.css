@@ -1,6 +1,7 @@
 /* MAP */
 .states {
-    stroke: #000;
+    stroke: #333;
+    fill: cornflowerblue;
     fill-opacity: .7;
 }
 
@@ -8,4 +9,9 @@
     fill: steelblue;
     fill-opacity: .8;
     stroke: #fff;
+}
+
+svg {
+  display: block;
+  margin: 0 auto;
 }
