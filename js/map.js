@@ -1,34 +1,41 @@
 var width = 960,
-    height = 500;
+  height = 500;
 
-var projection = d3.geo.albersUsa()
-    .scale(1000)
-    .translate([width / 2, height / 2]);
+var radius = d3.scale.sqrt()
+  .domain([0, 1e6])
+  .range([0, 10]);
 
-var path = d3.geo.path()
-    .projection(projection);
+var path = d3.geo.path();
+
+var color = d3.scale.category20();
 
 var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+  .attr("width", width)
+  .attr("height", height);
 
-d3.json("/data/us.json", function(error, us) {
-  if (error) throw error;
+queue()
+  .defer(d3.json, "data/us.json")
+  .defer(d3.json, "data/us-state-centroids.json")
+  .await(ready);
 
-  svg.insert("path", ".graticule")
-      .datum(topojson.feature(us, us.objects.land))
-      .attr("class", "land")
-      .attr("d", path);
+function ready(error, us, centroid) {
+  var countries = topojson.feature(us, us.objects.states).features,
+  neighbors = topojson.neighbors(us.objects.states.geometries);
 
-  svg.insert("path", ".graticule")
-      .datum(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b && !(a.id / 1000 ^ b.id / 1000); }))
-      .attr("class", "county-boundary")
-      .attr("d", path);
-
-  svg.insert("path", ".graticule")
-      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-      .attr("class", "state-boundary")
-      .attr("d", path);
-});
-
-d3.select(self.frameElement).style("height", height + "px");
+  svg.selectAll("states")
+    .data(countries)
+    .enter().insert("path", ".graticule")
+    .attr("class", "states")
+    .attr("d", path)
+    .style("fill", function(d, i) { return color(d.color = d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0); })
+    .on('mouseover', function(d, i) {
+      var currentState = this;
+      d3.select(this).style('fill-opacity', 1);
+    })
+    .on('mouseout', function(d, i) {
+      d3.selectAll('path')
+      .style({
+        'fill-opacity':0.7
+      });
+    });
+}
