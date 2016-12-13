@@ -12,7 +12,7 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("/mbostock/raw/4090846/us.json", function(error, us) {
+d3.json("/data/us.json", function(error, us) {
   if (error) throw error;
 
   svg.insert("path", ".graticule")
