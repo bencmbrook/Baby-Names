@@ -1,14 +1,7 @@
 /* MAP */
 .states {
     stroke: #333;
-    /*fill: cornflowerblue;*/
     fill-opacity: 1;
-}
-
-.symbol {
-    fill: steelblue;
-    fill-opacity: .8;
-    stroke: #fff;
 }
 
 svg {
@@ -85,4 +78,94 @@ div.tooltip {
   font-size: 13px;
   /*text-transform: uppercase;*/
   text-align: right;
+}
+
+
+/* VERTICAL NAVBAR */
+#sidebar {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  bottom: auto;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+#sidebar li {
+  text-align: right;
+}
+#sidebar a {
+  display: inline-block;
+  /* prevent weird movements on hover when you use a CSS3 transformation - webkit browsers */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+#sidebar a:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+#sidebar a span {
+  float: right;
+  display: inline-block;
+  -webkit-transform: scale(0.6);
+  -moz-transform: scale(0.6);
+  -ms-transform: scale(0.6);
+  -o-transform: scale(0.6);
+  transform: scale(0.6);
+}
+#sidebar a:hover span {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+#sidebar a:hover .cd-label {
+  opacity: 1;
+}
+#sidebar a.is-selected .cd-dot {
+  background-color: darkgrey;
+}
+#sidebar .cd-dot {
+  position: relative;
+  /* we set a top value in order to align the dot with the label. If you change label's font, you may need to change this top value*/
+  top: 12px;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: black;
+  -webkit-transition: -webkit-transform 0.2s, background-color 0.5s;
+  -moz-transition: -moz-transform 0.2s, background-color 0.5s;
+  transition: transform 0.2s, background-color 0.5s;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+
+#sidebar .cd-label {
+  position: relative;
+  margin-right: 10px;
+  padding: .4em .5em;
+  color: black;
+  font-size: 14px;
+  font-size: 0.875rem;
+  -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+  -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
+  opacity: 0;
+  -webkit-transform-origin: 100% 50%;
+  -moz-transform-origin: 100% 50%;
+  -ms-transform-origin: 100% 50%;
+  -o-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+}
+
+#header {
+  margin-top: 40px;
 }
