@@ -62,6 +62,28 @@ LineVis.prototype.initVis = function() {
         .attr("class", "line")
         .attr("d", vis.valueline(vis.data));
 
+    // Add vertical lines
+    vis.svg.append("path")
+        .attr("class", "vertline")
+        .attr("d", [
+          "M"+vis.x(1924)+" 10 V "+vis.y(0),
+          "M"+vis.x(1965)+" 10 V "+vis.y(0),
+          ]
+        );
+
+    // Add vertical line labels
+    vis.svg.append("text")
+        .attr("class", "vertlabel")
+        .attr("x", vis.x(1924) + 5)
+        .attr("y", 20)
+        .text("Immigration Act");
+
+    vis.svg.append("text")
+        .attr("class", "vertlabel")
+        .attr("x", vis.x(1965) + 5)
+        .attr("y", 20)
+        .text("Repealed");
+
     // Add the X Axis
     vis.svg.append("g")
         .attr("class", "x axis")
@@ -78,7 +100,6 @@ LineVis.prototype.initVis = function() {
 };
 
 LineVis.prototype.updateVis = function(stateName) {
-  console.log(stateName);
   var vis = this;
 
   // Get data for this state

@@ -46,3 +46,23 @@ svg {
 text {
   font-family: sans-serif;
 }
+
+.vertline {
+  stroke: #aaa;
+  stroke-dasharray: 5,5;
+  stroke-width: 1px;
+}
+
+.vertlabel {
+  font-size: 11px;
+  fill: #666;
+}
+
+.legendlabel {
+  font-size: 11px;
+  fill: black;
+}
+
+.gradient-rect {
+  stroke: black;
+}

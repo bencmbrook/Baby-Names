@@ -75,17 +75,17 @@ MapVis.prototype.initVis = function() {
   vis.width = $("#"+vis.parentElement).width() - vis.margin.left - vis.margin.right;
   vis.height = 302 - vis.margin.top - vis.margin.bottom;
 
+  vis.pallete = {
+    "color1" : "white",
+    "color2" : "orange"
+  };
+
+  // Generate projection of map polygons
   vis.m = d3.geo.albersUsa()
     .scale(600)
-    // .center([-60.439235,20.830666]);  // centers map at given coordinates
-    .translate([vis.width / 2, vis.height / 2]);
+    .translate([vis.width / 1.9, vis.height / 2]);
 
   vis.path = d3.geo.path().projection(vis.m);
-
-  vis.color = d3.scale.linear()
-    .domain([0,27])
-    .interpolate(d3.interpolateRgb)
-    .range(['white', 'orange']);
 
   vis.svg = d3.select("#"+vis.parentElement).append("svg")
     .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -100,6 +100,64 @@ MapVis.prototype.initVis = function() {
     vis.features = us.features;
     vis.data = pred;
 
+    // Turn state data into big array for domain processing
+    vis.dataArray = $.map(pred, function(obj, state) {
+      return $.map(obj, function(value, index) {
+        return [value];
+      });
+    });
+
+    // Build color scale
+    vis.color = d3.scale.linear()
+      .domain([0, d3.max(vis.dataArray, function(d) { return d.PercentForeign / 100; })])
+      .interpolate(d3.interpolateRgb)
+      .range([vis.pallete.color1, vis.pallete.color2]);
+
+    // Add legend
+    var g_width = 15,
+        g_height = vis.height - 100,
+        g_x = 1,
+        g_y = 30;
+
+    var gradient = vis.svg.append("defs")
+      .append("linearGradient")
+        .attr("id", "gradient")
+        .attr("x1", "0%")
+        .attr("y1", "100%")
+        .attr("x2", "0%")
+        .attr("y2", "0%")
+        .attr("spreadMethod", "pad");
+    gradient.append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", vis.pallete.color1)
+      .attr("stop-opacity", 1);
+    gradient.append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", vis.pallete.color2)
+      .attr("stop-opacity", 1);
+    vis.svg.append("rect")
+      .attr("class", "gradient-rect")
+      .attr("x", g_x)
+      .attr("y", g_y)
+      .attr("width", g_width)
+      .attr("height", g_height)
+      .attr("fill", "url(#gradient)");
+
+    // Add legend numbers
+    vis.svg.append("text")
+        .attr("class", "legendlabel")
+        .attr("x", g_width + 5)
+        .attr("y", g_height + g_y)
+        .text('0%');
+
+    vis.max = d3.max(vis.dataArray, function(d) {return d.PercentForeign;});
+    vis.svg.append("text")
+        .attr("class", "legendlabel")
+        .attr("x", g_width + 5)
+        .attr("y", g_y + 9)
+        .text( Math.round(vis.max) + "%" );
+
+    // Draw map
     var states = vis.svg.selectAll(".states")
       .data(vis.features)
       .enter().insert("path", ".graticule")
@@ -121,7 +179,7 @@ MapVis.prototype.initVis = function() {
         state_code = states_hash[d.properties.name];
         if (state_code === "PR") { return "white"; }
         else {
-          state_pred = vis.data[state_code]['0'].PercentForeign;
+          state_pred = (vis.data[state_code]['0'].PercentForeign) / 100;
           return vis.color(state_pred);
         }
       });
@@ -140,7 +198,7 @@ MapVis.prototype.updateVis = function(year) {
       state_code = states_hash[d.properties.name];
       if (state_code === "PR") { return "white"; }
       else {
-        state_pred = vis.data[state_code][year].PercentForeign;
+        state_pred = (vis.data[state_code][year].PercentForeign) / 100;
         return vis.color(state_pred);
       }
     });
