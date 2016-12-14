@@ -165,3 +165,7 @@ div.tooltip {
   -o-transform-origin: 100% 50%;
   transform-origin: 100% 50%;
 }
+
+#header {
+  margin-top: 40px;
+}
