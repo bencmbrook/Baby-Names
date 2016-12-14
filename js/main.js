@@ -11,9 +11,10 @@
 // }
 
 var eventHandler = {};
-var countVis = new MapVis("map-area", eventHandler);
+var MapVis = new MapVis("map-area", eventHandler);
 
 // Listen for onclick event on state
 $(eventHandler).bind("stateSelected", function(_, state) {
   console.log(state);
+  MapVis.updateVis(100);
 });

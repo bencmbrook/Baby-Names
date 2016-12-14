@@ -92,20 +92,13 @@ MapVis.prototype.initVis = function() {
     .await(ready);
 
   function ready(error, us, pred) {
-    vis.data = us.features;
+    vis.features = us.features;
+    vis.data = pred;
 
-    vis.svg.selectAll("states")
-      .data(vis.data)
+    var states = vis.svg.selectAll(".states")
+      .data(vis.features)
       .enter().insert("path", ".graticule")
       .attr("class", "states")
-      .attr("fill", function(d) {
-        state_code = states_hash[d.properties.name];
-        if (state_code === "PR") { return "white"; }
-        else {
-          state_pred = pred[state_code]['0'].PercentForeign;
-          return vis.color(state_pred);
-        }
-      })
       .attr("d", vis.path)
       .on('mouseover', function(d, i) {
         var currentState = this;
@@ -118,6 +111,32 @@ MapVis.prototype.initVis = function() {
       })
       .on('click', function(d, i) {
         $(vis.eventHandler).trigger("stateSelected", states_hash[d.properties.name]);
+      })
+      .attr("fill", function(d) {
+        state_code = states_hash[d.properties.name];
+        if (state_code === "PR") { return "white"; }
+        else {
+          state_pred = vis.data[state_code]['0'].PercentForeign;
+          return vis.color(state_pred);
+        }
       });
+
+    vis.updateVis(0);
   }
+};
+
+MapVis.prototype.updateVis = function(year) {
+  var vis = this;
+
+  vis.svg.selectAll(".states")
+    .transition()
+    .duration(500)
+    .attr("fill", function(d) {
+      state_code = states_hash[d.properties.name];
+      if (state_code === "PR") { return "white"; }
+      else {
+        state_pred = vis.data[state_code][year].PercentForeign;
+        return vis.color(state_pred);
+      }
+    });
 };
