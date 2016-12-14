@@ -110,7 +110,7 @@ MapVis.prototype.initVis = function() {
           .style("fill-opacity", "1");
       })
       .on('click', function(d, i) {
-        $(vis.eventHandler).trigger("stateSelected", vis.data[states_hash[d.properties.name]]);
+        $(vis.eventHandler).trigger("stateSelected", states_hash[d.properties.name]);
       })
       .attr("fill", function(d) {
         state_code = states_hash[d.properties.name];

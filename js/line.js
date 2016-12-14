@@ -24,8 +24,8 @@ LineVis.prototype.initVis = function() {
 
   // Define the line
   vis.valueline = d3.svg.line()
-    .x(function(d, i) { return x(i); })
-    .y(function(d) { return y(d.PercentForeign); });
+    .x(function(d, i) { return vis.x(i); })
+    .y(function(d) { return vis.y(d.PercentForeign); });
 
   // Adds the svg canvas
   vis.svg = d3.select("#"+vis.parentElement)
@@ -35,13 +35,22 @@ LineVis.prototype.initVis = function() {
     .append("g")
       .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-  vis.svg = d3.select("#"+vis.parentElement).append("svg")
-    .attr("width", vis.width)
-    .attr("height", vis.height);
-
   d3.json("data/pred.json", ready);
 
   function ready(error, pred) {
+    vis.allData = pred;
+    // Turn state data into arrays
+    for (var state in pred) {
+      if (pred.hasOwnProperty(state)) {
+        vis.allData[state] = $.map(pred[state], function(value, index) {
+          return [value];
+        });
+      }
+    }
+
+    // Use MA to start
+    vis.data = vis.allData.MA;
+
     // Scale the range of the data
     vis.x.domain(d3.extent(vis.data, function(d, i) { return i; }));
     vis.y.domain([0, d3.max(vis.data, function(d) { return d.PercentForeign; })]);
@@ -62,12 +71,15 @@ LineVis.prototype.initVis = function() {
         .attr("class", "y axis")
         .call(vis.yAxis);
 
-    vis.updateVis(0);
+    vis.updateVis("MA");
   }
 };
 
-LineVis.prototype.updateVis = function(year) {
+LineVis.prototype.updateVis = function(state) {
   var vis = this;
+
+  // Get data for this state
+  vis.data = vis.allData[state];
 
   // Scale the range of the data again
   vis.x.domain(d3.extent(vis.data, function(d, i) { return i; }));
