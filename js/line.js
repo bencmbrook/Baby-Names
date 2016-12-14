@@ -75,11 +75,12 @@ LineVis.prototype.initVis = function() {
   }
 };
 
-LineVis.prototype.updateVis = function(state) {
+LineVis.prototype.updateVis = function(stateName) {
+  console.log(stateName);
   var vis = this;
 
   // Get data for this state
-  vis.data = vis.allData[state];
+  vis.data = vis.allData[stateName];
 
   // Scale the range of the data again
   vis.x.domain(d3.extent(vis.data, function(d, i) { return i; }));
