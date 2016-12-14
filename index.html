@@ -10,154 +10,210 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container-fluid">
 
-  <!-- TITLE -->
-  <div class="row" id="header">
-    <div class="col-md-12">
-    <h1>Baby Names</h1>
-    </div>
-  </div>
-
-  <!-- INTRO -->
   <div class="row">
-    <div class="col-md-12">
-      <h2>Intro</h2>
-      <p>
-        Cultural and societal changes are an undeniable influence on our lives, yet it is so difficult to accurately quantify and track these developments. The principle issue is identifying metrics that appropriately encapsulate such a complex and intractable set of phenomena. Using U.S. baby name and Census country-of-origin data, we seek to find an appropriate proxy for nationwide diversification. Due to the strong ties between one’s name and country of origin, ethnicity, and religion, we believe distribution of baby names over time to be powerful predictors of demographic trends.  After exploration and analysis of the given data as well as existing historical US demographics data, we ultimately decided to build a model to predict the percentage of foreign-born residents using name distributions as predictors.  Using this model, we aim to interpolate the corresponding intercensal data regarding percentage of foreign-born residents in each state population in every year from 1910 to 2014.
-      </p>
-    </div>
-  </div>
+    <div class="col-xs-10 offset-xs-1">
+      <!-- TITLE -->
+      <div class="row" id="header">
+        <div class="col-md-12">
+        <h1>Baby Names</h1>
+        </div>
+      </div>
 
-  <!-- METHODS -->
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Exploring the Data</h2>
-      <h3>Initial Exploration</h3>
-      <p>
-				The raw dataset we were given has a row for every name that has occurred in a given state and given year, for the 50 states and Washington, D.C., and for all years from 1910 to 2014.  The column values are corresponding state,  year, gender of those who were given the name, and the count of people given that name. At first blush, the level of personal detail on each of these babies is very low: in the best case we only know the birth year, state, and gender of an individual. As a result, any analysis reliant on race or ethnicity will need to be indirectly extracted from this data.
-		  </p>
-		  <p>
-				Some useful summary statistics can nonetheless be gleaned from these preliminary data. The most popular boys’ and girls’ names of all time are Mary and James: 4,155,282 and 5,105,919 babies cumulatively since 1880, respectively. The most popular gender-ambiguous names change much more frequently, with the top spot going to Leslie in 1945 and Charlie in 2013. We defined a name as gender-ambiguous if its sex ratio was within 40:60 (i.e. no more than 10% away from 50-50 gender distribution). The difference in style between the most popular gender-ambiguous of 1945 and 2013 are emblematic of the increased preference towards individuality and “unique-sounding” names: the runners-up in 1945 were the traditionally-sounding Jackie, Jessie, Frankie, and Gerry. By 2013 these are replaced with Skyler, Dakota, Phoenix, and Justice. The name undergoing the greatest trend effect (i.e. the one with the largest contemporary increase since 1980) is Harper.
-      <p>
-        To get some initial idea of the flow of name trends, we created two sets of stacked-area graphs. The graphs plotted the total number of occurrences of each name in each year normalized to that year’s U.S. population size, with number of occurrences on the y-axis and year on the x-axis. This normalization was critical in order to compare the relative share of babies to which a given name corresponds, rather than the absolute number (which is subject to distortion by population growth). The sets were divided by gender and the criterion for including a name on the graph.  The first set was only concerned with names that have been the most popular in a given year - for males, this was only 7 names, as there have only been 7 unique male names to be the most popular in a state in a given year; for females this was 10 unique names.  The second set of graphs instead took the top 5 names in each year, which turned out to be 25 unique names for males and 46 unique names for females.
-      </p>
-		  </p>
-        <figure class="figure">
-          <img src="img/top1malenames_norm.png" class="figure-img img-fluid rounded" style="float:left; width: 50%">
-          <img src="img/top1femalenames_norm.png" class="figure-img img-fluid rounded" style="float:right; width: 50%">
-          <figcaption class="figure-caption">Figure 1. Normalized stacked area graphs of the 7 male and 10 female names from 1880 to 2013 that ranked as <em>the</em> most popular name at least once. <em>Please keep in mind that the stacked nature of the graphs means the legend is in mirrored order to the graphs.</em></figcaption>
-        </figure>
-      <p>
-        The "singularly" most popular graph (as opposed to the larger, "top 5" graph) does an excellent job of capturing the salient facts about the dataset without overcomplicating its presentation of these points. FThe most evident point is the greater amount of inherent individuality in girls' names than boys. The fact that 10, rather than 7 names make up the most popular for girls is one indicator. Another notable point is the high degree of volatiltiy with which these popularities change for girls; in other words, girls' names are much more subject to fads and trends. Additionally, with the exception of Noah and Jacob, the most popular male names reach back to the beginning of the time series, and remained close to their starting relative prportions for decades. Girls' names, on the other hand, have a much more varied history, with some names (like Emma) even going out of fashion before experience a contemporary resurgence. There is a clear preponderance of the name Mary during the earliest section of the time series (from 1880–1930). Successive waves of name fads (Linda, Lisa, Jennifer, Jessica, Ashley) deal blow after blow to Mary, until she is nothing but a husk of a name by the 1980s. Many of Mary's opponents, like Linda, have been effectively "fossilized," with Linda's boom and bust period occuring between 1930 and 1970 (for Ashley, Jennifer, and Jessica, their periods of popularity have just ended). Up-and-comers like Isabella and Sophia seem likely to dislodge the remaining footholds of the out-of-fashion names.
-      </p>
-      <p>
-        The graph based on the top 5 most popular names nevertheless is useful for providing a more macroscopic view on these trends. These graphs are a strong reflection of the prior "top 1" trends: the men exhibit the dominant stability of a few names over time, while the women have a much more colorful and dyanmically-changing bank of names to choose from. As a whole, these top 5 graphs are primarily helpful in confirming the two primary observations from above: (1) that the distribution of names becomes increasingly heterogeneous over time, reflecting increased cultura and racial diversity; and (2) that women's names are generally more varied and subject to stronger swings in popularity.
-      </p>
-        <figure class="figure">
-          <img src="img/top5malenames_norm.png" class="figure-img img-fluid rounded" style="float:left; width: 50%">
-          <img src="img/top5femalenames_norm.png" class="figure-img img-fluid rounded" style="float:right; width: 50%">
-          <figcaption class="figure-caption">Figure 2. Normalized stacked area graphs of the 25 male and 50 female names from 1880 to 2013 that ranked within the <em>top 5</em> most popular names at least once. <em>Please keep in mind that the stacked nature of the graphs means the legend is in mirrored order to the graphs.</em></figcaption>
-        </figure>
-		  <p>
-				The graphs give us an idea of the speed with which name popularity can both increase and decrease, shown by the fluctuations in height of each name’s region over time.  Furthermore, these graphs showed continuity in popularity from year to year, indicating that name popularities are driven by factors that are both time sensitive but not entirely volatile.  This played a role in our decision to use name distributions to predict demographic trends.
-		  </p>
-        <figure class="figure">
-          <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
-          <figcaption class="figure-caption">Figure 3. Plot of model score vs. number of PCA components .</figcaption>
-        </figure>
-      <p>
-        Due to the high dimensionality of the data, we performed PCA, cross-validating number of components with model score as well as explained variance.  We eventually concluded that 17 was the optimal number of components for the transformation. We then trained different preliminary regression models to predict percentage of foreign-born residents in each state in each year, using only counts of each name in each state as predictors. We eventually selecting Random Forests for its high score on multiple train-test splits.  We cross-validated the number of trees in the forest with the model score, determining that 50 was the optimal number of estimators.
-      </p>
-    </div>
-  </div>
+      <!-- INTRO -->
+      <div class="row" id="intro">
+        <div class="col-md-12">
+          <h2>Intro</h2>
+          <p>
+            Cultural and societal changes are an undeniable influence on our lives, yet it is so difficult to accurately quantify and track these developments. The principle issue is identifying metrics that appropriately encapsulate such a complex and intractable set of phenomena. Using U.S. baby name and Census country-of-origin data, we seek to find an appropriate proxy for nationwide diversification. Due to the strong ties between one’s name and country of origin, ethnicity, and religion, we believe distribution of baby names over time to be powerful predictors of demographic trends.  After exploration and analysis of the given data as well as existing historical US demographics data, we ultimately decided to build a model to predict the percentage of foreign-born residents using name distributions as predictors.  Using this model, we aim to interpolate the corresponding intercensal data regarding percentage of foreign-born residents in each state population in every year from 1910 to 2014.
+          </p>
+        </div>
+      </div>
 
-  <!-- DATA -->
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Modeling</h2>
-      <p>
-        We started with a simple data frame that contained name counts for states in the US for every year since 1910. We converted this data frame to the predictors data frame. In the new data frame every column contains the count of every name in the original data frame for every decade in a given year.
-      </p>
-    </div>
-  </div>
-
-  <!-- RESULTS -->
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Results</h2>
-       <p>
-                Our calculated predictions can be classified along two principle dimensions: geographic and temporal.  This necessitates a multimedia approach to representing the data. In order to better visualize the results, a multi-panel animation was constructed. Annual nationwide heatmaps of our predictions were generated, allowing geographic comparison. Each of these heatmaps has been layered into a combined timeline, which best illustrates the time-varying aspect of the data. This timeline is interactive, and a specific interpolation date can be set by dragging the slider across the timeline. A light-to-dark orange gradient was chosen, with extremes set at 0 and 30%. This gradient colors each state according to the share of foreigners in the registered population for each year. This figure was instrumental in quantitatively comparing our predictions and test sets. The multi-state analysis afforded more granularity than looking at each state one-by-one; in this way, we gained insight into the <em>regional</em> trends and variations and immigration. 
-      </p>
-      <p>
-        [DISCUSS LINE PLOT PREDICTIONS AND THEIR PURPOSE]
-      </p>
-      <p>
-                Some generalizations can be extracted from this long-term view. Overall, in terms of gross historical migration, the heatmaps indicate a decrease in immigrants from 1910–1970, with a sharp nationwide rebound post-1970.
+      <!-- METHODS -->
+      <div class="row" id="exploration">
+        <div class="col-md-12">
+          <h2>Exploring the Data</h2>
+          <h3>Initial Exploration</h3>
+          <p>
+    				The raw dataset we were given has a row for every name that has occurred in a given state and given year, for the 50 states and Washington, D.C., and for all years from 1910 to 2014.  The column values are corresponding state,  year, gender of those who were given the name, and the count of people given that name. At first blush, the level of personal detail on each of these babies is very low: in the best case we only know the birth year, state, and gender of an individual. As a result, any analysis reliant on race or ethnicity will need to be indirectly extracted from this data.
+    		  </p>
+    		  <p>
+    				Some useful summary statistics can nonetheless be gleaned from these preliminary data. The most popular boys’ and girls’ names of all time are Mary and James: 4,155,282 and 5,105,919 babies cumulatively since 1880, respectively. The most popular gender-ambiguous names change much more frequently, with the top spot going to Leslie in 1945 and Charlie in 2013. We defined a name as gender-ambiguous if its sex ratio was within 40:60 (i.e. no more than 10% away from 50-50 gender distribution). The difference in style between the most popular gender-ambiguous of 1945 and 2013 are emblematic of the increased preference towards individuality and “unique-sounding” names: the runners-up in 1945 were the traditionally-sounding Jackie, Jessie, Frankie, and Gerry. By 2013 these are replaced with Skyler, Dakota, Phoenix, and Justice. The name undergoing the greatest trend effect (i.e. the one with the largest contemporary increase since 1980) is Harper.
+          <p>
+            To get some initial idea of the flow of name trends, we created two sets of stacked-area graphs. The graphs plotted the total number of occurrences of each name in each year normalized to that year’s U.S. population size, with number of occurrences on the y-axis and year on the x-axis. This normalization was critical in order to compare the relative share of babies to which a given name corresponds, rather than the absolute number (which is subject to distortion by population growth). The sets were divided by gender and the criterion for including a name on the graph.  The first set was only concerned with names that have been the most popular in a given year - for males, this was only 7 names, as there have only been 7 unique male names to be the most popular in a state in a given year; for females this was 10 unique names.  The second set of graphs instead took the top 5 names in each year, which turned out to be 25 unique names for males and 46 unique names for females.
+          </p>
+    		  </p>
+            <figure class="figure">
+              <img src="img/top1malenames_norm.png" class="figure-img img-fluid rounded" style="float:left; width: 50%">
+              <img src="img/top1femalenames_norm.png" class="figure-img img-fluid rounded" style="float:right; width: 50%">
+              <figcaption class="figure-caption">Figure 1. Normalized stacked area graphs of the 7 male and 10 female names from 1880 to 2013 that ranked as <em>the</em> most popular name at least once. <em>Please keep in mind that the stacked nature of the graphs means the legend is in mirrored order to the graphs.</em></figcaption>
+            </figure>
+          <p>
+            The "singularly" most popular graph (as opposed to the larger, "top 5" graph) does an excellent job of capturing the salient facts about the dataset without overcomplicating its presentation of these points. FThe most evident point is the greater amount of inherent individuality in girls' names than boys. The fact that 10, rather than 7 names make up the most popular for girls is one indicator. Another notable point is the high degree of volatiltiy with which these popularities change for girls; in other words, girls' names are much more subject to fads and trends. Additionally, with the exception of Noah and Jacob, the most popular male names reach back to the beginning of the time series, and remained close to their starting relative prportions for decades. Girls' names, on the other hand, have a much more varied history, with some names (like Emma) even going out of fashion before experience a contemporary resurgence. There is a clear preponderance of the name Mary during the earliest section of the time series (from 1880–1930). Successive waves of name fads (Linda, Lisa, Jennifer, Jessica, Ashley) deal blow after blow to Mary, until she is nothing but a husk of a name by the 1980s. Many of Mary's opponents, like Linda, have been effectively "fossilized," with Linda's boom and bust period occuring between 1930 and 1970 (for Ashley, Jennifer, and Jessica, their periods of popularity have just ended). Up-and-comers like Isabella and Sophia seem likely to dislodge the remaining footholds of the out-of-fashion names.
           </p>
           <p>
-                To further validate these observations, we relied on historical precedent to help qualitatively frame the data. These trends roughly coincide with two important historical events in the history of U.S. immigration: the 1924 Johnson-Reed quota, severely limiting immigration to a select few groups of Europeans; and the 1965 Hart-Cellar Act effectively reversing the quota laws in place since the 20s. Demonstrates the confluence between the economic (the Depression in the 30’s), the military (WWII), and the political (immigration acts), and their role in affecting demographic data.
+            The graph based on the top 5 most popular names nevertheless is useful for providing a more macroscopic view on these trends. These graphs are a strong reflection of the prior "top 1" trends: the men exhibit the dominant stability of a few names over time, while the women have a much more colorful and dyanmically-changing bank of names to choose from. As a whole, these top 5 graphs are primarily helpful in confirming the two primary observations from above: (1) that the distribution of names becomes increasingly heterogeneous over time, reflecting increased cultura and racial diversity; and (2) that women's names are generally more varied and subject to stronger swings in popularity.
+          </p>
+            <figure class="figure">
+              <img src="img/top5malenames_norm.png" class="figure-img img-fluid rounded" style="float:left; width: 50%">
+              <img src="img/top5femalenames_norm.png" class="figure-img img-fluid rounded" style="float:right; width: 50%">
+              <figcaption class="figure-caption">Figure 2. Normalized stacked area graphs of the 25 male and 50 female names from 1880 to 2013 that ranked within the <em>top 5</em> most popular names at least once. <em>Please keep in mind that the stacked nature of the graphs means the legend is in mirrored order to the graphs.</em></figcaption>
+            </figure>
+    		  <p>
+    				The graphs give us an idea of the speed with which name popularity can both increase and decrease, shown by the fluctuations in height of each name’s region over time.  Furthermore, these graphs showed continuity in popularity from year to year, indicating that name popularities are driven by factors that are both time sensitive but not entirely volatile.  This played a role in our decision to use name distributions to predict demographic trends.
+    		  </p>
+            <figure class="figure">
+              <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
+              <figcaption class="figure-caption">Figure 3. Plot of model score vs. number of PCA components .</figcaption>
+            </figure>
+          <p>
+            Due to the high dimensionality of the data, we performed PCA, cross-validating number of components with model score as well as explained variance.  We eventually concluded that 17 was the optimal number of components for the transformation. We then trained different preliminary regression models to predict percentage of foreign-born residents in each state in each year, using only counts of each name in each state as predictors. We eventually selecting Random Forests for its high score on multiple train-test splits.  We cross-validated the number of trees in the forest with the model score, determining that 50 was the optimal number of estimators.
+          </p>
+        </div>
+      </div>
+
+      <!-- DATA -->
+      <div class="row" id="modeling">
+        <div class="col-md-12">
+          <h2>Modeling</h2>
+          <p>
+            We started with a simple data frame that contained name counts for states in the US for every year since 1910. We converted this data frame to the predictors data frame. In the new data frame every column contains the count of every name in the original data frame for every decade in a given year.
+          </p>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="row" id="results">
+        <div class="col-md-12">
+          <h2>Results</h2>
+           <p>
+                    Our calculated predictions can be classified along two principle dimensions: geographic and temporal.  This necessitates a multimedia approach to representing the data. In order to better visualize the results, a multi-panel animation was constructed. Annual nationwide heatmaps of our predictions were generated, allowing geographic comparison. Each of these heatmaps has been layered into a combined timeline, which best illustrates the time-varying aspect of the data. This timeline is interactive, and a specific interpolation date can be set by dragging the slider across the timeline. A light-to-dark orange gradient was chosen, with extremes set at 0 and 30%. This gradient colors each state according to the share of foreigners in the registered population for each year. This figure was instrumental in quantitatively comparing our predictions and test sets. The multi-state analysis afforded more granularity than looking at each state one-by-one; in this way, we gained insight into the <em>regional</em> trends and variations and immigration.
           </p>
           <p>
-                Using the distribution of baby names per state in a given year as our predictor yields a rather close fit to the real data. We are excited about the powerful potential in state map visualizations, believe the interactive timeline slider juxtaposing heatmaps with scatter plots in an excellent way to concisely, yet comprehensively, represent our data.
+            [DISCUSS LINE PLOT PREDICTIONS AND THEIR PURPOSE]
           </p>
-      <p>
-       [STATE-SPECIFIC DISCUSSION]
-      </p>
+          <p>
+                    Some generalizations can be extracted from this long-term view. Overall, in terms of gross historical migration, the heatmaps indicate a decrease in immigrants from 1910–1970, with a sharp nationwide rebound post-1970.
+              </p>
+              <p>
+                    To further validate these observations, we relied on historical precedent to help qualitatively frame the data. These trends roughly coincide with two important historical events in the history of U.S. immigration: the 1924 Johnson-Reed quota, severely limiting immigration to a select few groups of Europeans; and the 1965 Hart-Cellar Act effectively reversing the quota laws in place since the 20s. Demonstrates the confluence between the economic (the Depression in the 30’s), the military (WWII), and the political (immigration acts), and their role in affecting demographic data.
+              </p>
+              <p>
+                    Using the distribution of baby names per state in a given year as our predictor yields a rather close fit to the real data. We are excited about the powerful potential in state map visualizations, believe the interactive timeline slider juxtaposing heatmaps with scatter plots in an excellent way to concisely, yet comprehensively, represent our data.
+              </p>
+          <p>
+           [STATE-SPECIFIC DISCUSSION]
+          </p>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE VISUALIZATION -->
+      <div class="row" id="predictions">
+        <div class="col-md-6">
+          <h2>Predictions of Percent Foreign Born</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <!-- MAP VISUALIZATION -->
+          <h4 id="year">1910</h4>
+          <div id="map-area"></div>
+          <div id="slider"></div>
+        </div>
+        <!-- LINE VISUALIZATION -->
+        <div class="col-md-6">
+          <h4 id="line-title">Massachusetts</h2>
+          <div id="line-area"></div>
+        </div>
+      </div>
+
+      <div class="row">
+
+      </div>
+
+      <!-- CONCLUSIONS -->
+      <div class="row" id="conclusion">
+        <div class="col-md-12">
+          <h2>Conclusions</h2>
+           <p>
+            (DISCUSS Further Avenues of Exploration)
+            We hope to expand our predictor’s detail by slicing foreign-born groups into specific regions and predicting these regional distributions. Incorporation of more detailed Census data would be helpful, doubling the number of test observations to score our prediction against.
+          </p>
+        </div>
+      </div>
+
+      <!-- CITATIONS AND LINKS -->
+      <div class="row" id="citations">
+        <div class="col-md-12">
+          <h2>Citations and Links</h2>
+          <dl class="row">
+            <dt class="col-sm-3">Datasets</dt>
+            <dd class="col-sm-9"><a href="https://www.kaggle.com/kaggle/us-baby-names">Baby names: Kaggle</a></dd>
+            <dd class="col-sm-9 offset-sm-3"><a href="http://www.census.gov/population/www/documentation/twps0081/tables/tab14.csv">Foreigner demographic data: U.S. Census Bureau</a></dd>
+
+            <dt class="col-sm-3">Works Referenced</dt>
+            <dd class="col-sm-9">Barucca, Paolo, et al. "Cross-correlations of American baby names. "Proceedings of the National Academy of Sciences 112.26 (2015): 7943-7947.</dd>
+            <dd class="col-sm-9 offset-sm-3">Twenge, Jean M., Emodish M. Abebe, and W. Keith Campbell. "Fitting In or Standing Out: Trends in American parents' choices for children’s names, 1880–2007." Social Psychological and Personality Science 1.1 (2010): 19-25.</dd>
+          </dl>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- INTERACTIVE VISUALIZATION -->
-  <div class="row">
-    <div class="col-md-6">
-      <h2>Predictions of Percent Foreign Born</h2>
+    <!-- SIDEBAR -->
+    <div class="col-xs-1">
+      <div id="sidebar">
+        <nav>
+          <ul>
+            <li>
+              <a href="#intro" data-number="1">
+                <span class="cd-dot"></span>
+                <span class="cd-label">Introduction</span>
+              </a>
+            </li>
+            <li>
+              <a href="#exploration" data-number="1">
+                <span class="cd-dot"></span>
+                <span class="cd-label">Exploration</span>
+              </a>
+            </li>
+            <li>
+              <a href="#modeling" data-number="1">
+                <span class="cd-dot"></span>
+                <span class="cd-label">Modeling</span>
+              </a>
+            </li>
+            <li>
+              <a href="#results" data-number="1">
+                <span class="cd-dot"></span>
+                <span class="cd-label">Results</span>
+              </a>
+            </li>
+            <li>
+              <a href="#predictions" data-number="1">
+                <span class="cd-dot"></span>
+                <span class="cd-label">Predictions</span>
+              </a>
+            </li>
+            <li>
+              <a href="#conclusion" data-number="1">
+                <span class="cd-dot"></span>
+                <span class="cd-label">Conclusion</span>
+              </a>
+            </li>
+            <li>
+              <a href="#citations" data-number="1">
+                <span class="cd-dot"></span>
+                <span class="cd-label">Conclusion</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <!-- MAP VISUALIZATION -->
-      <h4 id="year">1910</h4>
-      <div id="map-area"></div>
-      <div id="slider"></div>
-    </div>
-    <!-- LINE VISUALIZATION -->
-    <div class="col-md-6">
-      <h4 id="line-title">Massachusetts</h2>
-      <div id="line-area"></div>
-    </div>
-  </div>
-
-  <div class="row">
 
   </div>
-
-  <!-- CONCLUSIONS -->
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Conclusions</h2>
-       <p>
-        (DISCUSS Further Avenues of Exploration)
-        We hope to expand our predictor’s detail by slicing foreign-born groups into specific regions and predicting these regional distributions. Incorporation of more detailed Census data would be helpful, doubling the number of test observations to score our prediction against.
-      </p>
-    </div>
-  </div>
-
-  <!-- CITATIONS AND LINKS -->
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Citations and Links</h2>
-      <dl class="row">
-        <dt class="col-sm-3">Datasets</dt>
-        <dd class="col-sm-9"><a href="https://www.kaggle.com/kaggle/us-baby-names">Baby names: Kaggle</a></dd>
-        <dd class="col-sm-9 offset-sm-3"><a href="http://www.census.gov/population/www/documentation/twps0081/tables/tab14.csv">Foreigner demographic data: U.S. Census Bureau</a></dd>
-
-        <dt class="col-sm-3">Works Referenced</dt>
-        <dd class="col-sm-9">Barucca, Paolo, et al. "Cross-correlations of American baby names. "Proceedings of the National Academy of Sciences 112.26 (2015): 7943-7947.</dd>
-        <dd class="col-sm-9 offset-sm-3">Twenge, Jean M., Emodish M. Abebe, and W. Keith Campbell. "Fitting In or Standing Out: Trends in American parents' choices for children’s names, 1880–2007." Social Psychological and Personality Science 1.1 (2010): 19-25.</dd>
-      </dl>
-    </div>
-  </div>
-
 </div>
 
 <script src="js/lib/d3.slider.js"></script>

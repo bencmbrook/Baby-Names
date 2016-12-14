@@ -86,3 +86,7 @@ div.tooltip {
   /*text-transform: uppercase;*/
   text-align: right;
 }
+
+#sidebar {
+  position: fixed;
+}
