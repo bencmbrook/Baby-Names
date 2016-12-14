@@ -38,3 +38,11 @@ svg {
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
+
+.axis {
+  font-size: 11px;
+}
+
+text {
+  font-family: sans-serif;
+}
