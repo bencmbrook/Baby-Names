@@ -83,8 +83,8 @@ MapVis.prototype.initVis = function() {
     .range(['white', 'orange']);
 
   vis.svg = d3.select("#"+vis.parentElement).append("svg")
-    .attr("width", vis.width)
-    .attr("height", vis.height);
+    .attr("width", vis.width + vis.margin.left + vis.margin.right)
+    .attr("height", vis.height + vis.margin.left + vis.margin.right);
 
   queue()
     .defer(d3.json, "data/us-states.json")
@@ -110,7 +110,7 @@ MapVis.prototype.initVis = function() {
           .style("fill-opacity", "1");
       })
       .on('click', function(d, i) {
-        $(vis.eventHandler).trigger("stateSelected", states_hash[d.properties.name]);
+        $(vis.eventHandler).trigger("stateSelected", vis.data[states_hash[d.properties.name]]);
       })
       .attr("fill", function(d) {
         state_code = states_hash[d.properties.name];
