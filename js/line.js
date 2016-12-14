@@ -37,14 +37,27 @@ LineVis.prototype.initVis = function() {
     .append("g")
       .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-  d3.json("data/pred.json", ready);
 
-  function ready(error, pred) {
+  queue()
+    .defer(d3.json, "data/pred.json")
+    .defer(d3.json, "data/y.json")
+    .await(ready);
+
+  function ready(error, pred, y) {
     vis.allData = pred;
     // Turn state data into arrays
     for (var state in pred) {
       if (pred.hasOwnProperty(state)) {
         vis.allData[state] = $.map(pred[state], function(value, index) {
+          return [value];
+        });
+      }
+    }
+    // Turn state data into arrays
+    vis.allY = y;
+    for (state in y) {
+      if (y.hasOwnProperty(state)) {
+        vis.allY[state] = $.map(y[state], function(value, index) {
           return [value];
         });
       }
