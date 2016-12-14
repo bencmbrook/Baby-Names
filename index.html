@@ -86,8 +86,16 @@
       <div class="col-md-12">
         <h3>PCA</h3>
           <p>
-            Talk about PCA
+            We continued to tune the parameters for the random forest regressor to choose the n_estimators and max_features parameters that result in the highest accuracy on the test set. We ran 5 fold cross validation for every n_estimators value between 10 and 500 (with increments of 10). Similarly, we tested values between 2 and 20 (the chosen number of PCA components) for the max_features parameter. We found that for n_estimators=100 and max_features=4 we get the best accuracy on the test set.
           </p>
+          <figure class="figure">
+            <img src="img/Randomforest_num_trees_tuning.png" class="figure-img img-fluid rounded">
+            <figcaption class="figure-caption">Figure 4. Plot of model score vs. number of trees in random forest .</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="img/Randomforest_max_features_tuning.png" class="figure-img img-fluid rounded">
+            <figcaption class="figure-caption">Figure 5. Plot of model score vs. max features considered in each split in random forest .</figcaption>
+          </figure>
           <p>
             Talk about Lasso
           </p>
