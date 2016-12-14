@@ -17,9 +17,19 @@ jQuery(document).ready(function($){
 		contentSections.each(function(){
 			$this = $(this);
 			var activeSection = $('#sidebar a[href="#'+$this.attr('id')+'"]').data('number') - 1;
-			if ( ( $this.offset().top - $(window).height()/2 < $(window).scrollTop() ) && ( $this.offset().top + $this.height() - $(window).height()/2 > $(window).scrollTop() ) ) {
+
+      // scrollTop scroll distance from top
+      // offset is div distance from top
+      // this.height is div height
+      console.log($this);
+			if (
+        // If scroll is past top of div
+        ( $(window).scrollTop() >= $this.offset().top ) &&
+        // ... and not past bottom of div
+        ( $(window).scrollTop() < $this.offset().top + $this.height() ) )
+      {
 				navigationItems.eq(activeSection).addClass('is-selected');
-			}else {
+			} else {
 				navigationItems.eq(activeSection).removeClass('is-selected');
 			}
 		});
