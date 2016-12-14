@@ -21,10 +21,10 @@ svg {
   margin-bottom: 30px;
 }
 
-path {
-    stroke: steelblue;
-    stroke-width: 2;
-    fill: none;
+.line {
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
 }
 
 .axis path,
