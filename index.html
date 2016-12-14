@@ -40,24 +40,48 @@
 		  <p>
 				Some useful summary statistics can nonetheless be gleaned from these preliminary data. The most popular boys’ and girls’ names of all time are Mary and James: 4,155,282 and 5,105,919 babies cumulatively since 1880, respectively. The most popular gender-ambiguous names change much more frequently, with the top spot going to Leslie in 1945 and Charlie in 2013. We defined a name as gender-ambiguous if its sex ratio was within 40:60 (i.e. no more than 10% away from 50-50 gender distribution). The difference in style between the most popular gender-ambiguous of 1945 and 2013 are emblematic of the increased preference towards individuality and “unique-sounding” names: the runners-up in 1945 were the traditionally-sounding Jackie, Jessie, Frankie, and Gerry. By 2013 these are replaced with Skyler, Dakota, Phoenix, and Justice. The name undergoing the greatest trend effect (i.e. the one with the largest contemporary increase since 1980) is Harper.
 		  </p>
+      <div class="container">
+        <h2>Dynamic Pills</h2>
+        <p>To make the tabs toggleable, add the data-toggle="pill" attribute to each link. Then add a .tab-pane class with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
+        <ul class="nav nav-pills">
+          <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
+          <li><a data-toggle="pill" href="#menu1">Menu 1</a></li>
+          <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
+          <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
+        </ul>
+        
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <h3>HOME</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </div>
+          <div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+          </div>
+          <div id="menu3" class="tab-pane fade">
+            <h3>Menu 3</h3>
+            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+          </div>
+        </div>
+      </div>
 		  <p>
 				To get some initial idea of the flow of name trends, we created two sets of stacked-area graphs. The graphs plotted the total number of occurrences of each name in each year normalized to that year’s U.S. population size, with number of occurrences on the y-axis and year on the x-axis. This normalization was critical in order to compare the relative share of babies to which a given name corresponds, rather than the absolute number (which is subject to distortion by population growth). The sets were divided by gender and the criterion for including a name on the graph.  The first set was only concerned with names that have been the most popular in a given year - for males, this was only 7 names, as there have only been 7 unique male names to be the most popular in a state in a given year; for females this was 10 unique names.  The second set of graphs instead took the top 5 names in each year, which turned out to be 25 unique names for males and 46 unique names for females.
 		  </p>
-	      <figure class="figure">
-	        <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
-	        <figcaption class="figure-caption">Figure 1. Plot of model score vs. number of PCA components.</figcaption>
-	      </figure>
 		  <p>
 				The graphs give us an idea of the speed with which name popularity can both increase and decrease, shown by the fluctuations in height of each name’s region over time.  Furthermore, these graphs showed continuity in popularity from year to year, indicating that name popularities are driven by factors that are both time sensitive but not entirely volatile.  This played a role in our decision to use name distributions to predict demographic trends.
 		  </p>
-      <figure class="figure">
-        <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
-        <figcaption class="figure-caption">Figure 1. Plot of model score vs. number of PCA components.</figcaption>
-      </figure>
+        <figure class="figure">
+          <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
+          <figcaption class="figure-caption">Figure 1. Plot of model score vs. number of PCA components .</figcaption>
+        </figure>
       <p>
-        Due to the high dimensionality of the data, we performed PCA, cross-validating number of components with model score as well as explained variance.  We eventually concluded that 17 was the optimal number of components for the transformation. We then trained different preliminary regression models to predict percentage of foreign-born residents in each state in each year, using only counts of each name in each state as predictors. We eventually selecting Random Forests for its high score on multiple train-test splits.  We cross-validated number of trees in the forest with model score, determining that 50 was the optimal number of estimators.
+        Due to the high dimensionality of the data, we performed PCA, cross-validating number of components with model score as well as explained variance.  We eventually concluded that 17 was the optimal number of components for the transformation. We then trained different preliminary regression models to predict percentage of foreign-born residents in each state in each year, using only counts of each name in each state as predictors. We eventually selecting Random Forests for its high score on multiple train-test splits.  We cross-validated the number of trees in the forest with the model score, determining that 50 was the optimal number of estimators.
       </p>
-      <img src=""></img>
     </div>
   </div>
 
