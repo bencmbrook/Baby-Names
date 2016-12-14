@@ -70,8 +70,6 @@ var radius = d3.scale.sqrt()
 
 var path = d3.geo.path();
 
-// var color = d3.scale.Sequential(d3.interpolatePiYG);
-
 var color = d3.scale.linear()
   .domain([0,27])
   .interpolate(d3.interpolateRgb)
@@ -82,15 +80,12 @@ var svg = d3.select("#map-area").append("svg")
   .attr("height", height);
 
 queue()
-  // .defer(d3.json, "data/us.json")
   .defer(d3.json, "data/us-states.json")
   .defer(d3.json, "data/pred.json")
   .await(ready);
 
 function ready(error, us, pred) {
-  // var states_data = topojson.feature(us, us.objects.states).features;
   var states_data = us.features;
-  // var neighbors = topojson.neighbors(us.objects.states.geometries);
 
   svg.selectAll("states")
     .data(states_data)
