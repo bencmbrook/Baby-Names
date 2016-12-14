@@ -35,21 +35,21 @@
       <h2>Exploring the Data</h2>
       <h3>Initial Exploration</h3>
       <p>
-		The raw dataset we were given has a row for every name that has occurred in a given state and given year, for the 50 states and Washington, D.C., and for all years from 1910 to 2014.  The column values are corresponding state,  year, gender of those who were given the name, and the count of people given that name. At first blush, the level of personal detail on each of these babies is very low: in the best case we only know the birth year, state, and gender of an individual. As a result, any analysis reliant on race or ethnicity will need to be indirectly extracted from this data. 
-	  </p>
-	  <p>
-		Some useful summary statistics can nonetheless be gleaned from these preliminary data. The most popular boys’ and girls’ names of all time are Mary and James: 4,155,282 and 5,105,919 babies cumulatively since 1880, respectively. The most popular gender-ambiguous names change much more frequently, with the top spot going to Leslie in 1945 and Charlie in 2013. We defined a name as gender-ambiguous if its sex ratio was within 40:60 (i.e. no more than 10% away from 50-50 gender distribution). The difference in style between the most popular gender-ambiguous of 1945 and 2013 are emblematic of the increased preference towards individuality and “unique-sounding” names: the runners-up in 1945 were the traditionally-sounding Jackie, Jessie, Frankie, and Gerry. By 2013 these are replaced with Skyler, Dakota, Phoenix, and Justice. The name undergoing the greatest trend effect (i.e. the one with the largest contemporary increase since 1980) is Harper.
-	  </p>
-	  <p>
-		To get some initial idea of the flow of name trends, we created two sets of stacked-area graphs. The graphs plotted the total number of occurrences of each name in each year normalized to that year’s U.S. population size, with number of occurrences on the y-axis and year on the x-axis. This normalization was critical in order to compare the relative share of babies to which a given name corresponds, rather than the absolute number (which is subject to distortion by population growth). The sets were divided by gender and the criterion for including a name on the graph.  The first set was only concerned with names that have been the most popular in a given year - for males, this was only 7 names, as there have only been 7 unique male names to be the most popular in a state in a given year; for females this was 10 unique names.  The second set of graphs instead took the top 5 names in each year, which turned out to be 25 unique names for males and 46 unique names for females.
-	  </p>
-      <figure class="figure">
-        <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
-        <figcaption class="figure-caption">Figure 1. Plot of model score vs. number of PCA components.</figcaption>
-      </figure>
-	  <p>
-		The graphs give us an idea of the speed with which name popularity can both increase and decrease, shown by the fluctuations in height of each name’s region over time.  Furthermore, these graphs showed continuity in popularity from year to year, indicating that name popularities are driven by factors that are both time sensitive but not entirely volatile.  This played a role in our decision to use name distributions to predict demographic trends.
-	  </p>
+				The raw dataset we were given has a row for every name that has occurred in a given state and given year, for the 50 states and Washington, D.C., and for all years from 1910 to 2014.  The column values are corresponding state,  year, gender of those who were given the name, and the count of people given that name. At first blush, the level of personal detail on each of these babies is very low: in the best case we only know the birth year, state, and gender of an individual. As a result, any analysis reliant on race or ethnicity will need to be indirectly extracted from this data. 
+		  </p>
+		  <p>
+				Some useful summary statistics can nonetheless be gleaned from these preliminary data. The most popular boys’ and girls’ names of all time are Mary and James: 4,155,282 and 5,105,919 babies cumulatively since 1880, respectively. The most popular gender-ambiguous names change much more frequently, with the top spot going to Leslie in 1945 and Charlie in 2013. We defined a name as gender-ambiguous if its sex ratio was within 40:60 (i.e. no more than 10% away from 50-50 gender distribution). The difference in style between the most popular gender-ambiguous of 1945 and 2013 are emblematic of the increased preference towards individuality and “unique-sounding” names: the runners-up in 1945 were the traditionally-sounding Jackie, Jessie, Frankie, and Gerry. By 2013 these are replaced with Skyler, Dakota, Phoenix, and Justice. The name undergoing the greatest trend effect (i.e. the one with the largest contemporary increase since 1980) is Harper.
+		  </p>
+		  <p>
+				To get some initial idea of the flow of name trends, we created two sets of stacked-area graphs. The graphs plotted the total number of occurrences of each name in each year normalized to that year’s U.S. population size, with number of occurrences on the y-axis and year on the x-axis. This normalization was critical in order to compare the relative share of babies to which a given name corresponds, rather than the absolute number (which is subject to distortion by population growth). The sets were divided by gender and the criterion for including a name on the graph.  The first set was only concerned with names that have been the most popular in a given year - for males, this was only 7 names, as there have only been 7 unique male names to be the most popular in a state in a given year; for females this was 10 unique names.  The second set of graphs instead took the top 5 names in each year, which turned out to be 25 unique names for males and 46 unique names for females.
+		  </p>
+	      <figure class="figure">
+	        <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
+	        <figcaption class="figure-caption">Figure 1. Plot of model score vs. number of PCA components.</figcaption>
+	      </figure>
+		  <p>
+				The graphs give us an idea of the speed with which name popularity can both increase and decrease, shown by the fluctuations in height of each name’s region over time.  Furthermore, these graphs showed continuity in popularity from year to year, indicating that name popularities are driven by factors that are both time sensitive but not entirely volatile.  This played a role in our decision to use name distributions to predict demographic trends.
+		  </p>
       <figure class="figure">
         <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
         <figcaption class="figure-caption">Figure 1. Plot of model score vs. number of PCA components.</figcaption>
@@ -82,21 +82,21 @@
         The heatmaps indicate an overall decrease in foreigners from 1910–1970, with a sharp nationwide rebound post-1970. This roughly coincides with two important historical events in the history of U.S. immigration: the 1924 Johnson-Reed quota, severely limiting immigration to a select few groups of Europeans; and the 1965 Hart-Cellar Act effectively reversing the quota laws in place since the 20s. Demonstrates the confluence between the economic (the Depression in the 30’s), the military (WWII), and the political (immigration acts), and their role in affecting demographic data.
       </p>
       <p>
-		Our calculated predictions can be classified along two principle dimensions: geographic and temporal.  This necessitates a multimedia approach to representing the data. In order to better visualize the results, Tableau Analytics were utilized (fig. 3). Annual nationwide heatmaps of our predictions were generated, allowing geographic comparison. Each of these heatmaps has been layered into a combined timeline, which best illustrates the time-varying aspect of the data.  A light-to-dark blue gradient was chosen, with extremes set at 0 and 30%. This gradient colors each state according to the share of foreigners in the registered population for each year. Fig. 4 was instrumental in quantitatively comparing our predictions and test sets. The multi-state analysis (NY, CA, FL, TX) afforded more granularity than the state visualizations alone, for example in calculating the model’s predictive errors for each decade. To validate these observations, we relied on historical precedent to help qualitatively frame the data.
+				Our calculated predictions can be classified along two principle dimensions: geographic and temporal.  This necessitates a multimedia approach to representing the data. In order to better visualize the results, Tableau Analytics were utilized (fig. 3). Annual nationwide heatmaps of our predictions were generated, allowing geographic comparison. Each of these heatmaps has been layered into a combined timeline, which best illustrates the time-varying aspect of the data.  A light-to-dark blue gradient was chosen, with extremes set at 0 and 30%. This gradient colors each state according to the share of foreigners in the registered population for each year. Fig. 4 was instrumental in quantitatively comparing our predictions and test sets. The multi-state analysis (NY, CA, FL, TX) afforded more granularity than the state visualizations alone, for example in calculating the model’s predictive errors for each decade. To validate these observations, we relied on historical precedent to help qualitatively frame the data.
       </p>
       <p>
-		Some generalizations can be extracted from this long-term view. Overall, in terms of gross historical migration, the heatmaps indicate a decrease in immigrants from 1910–1970, with a sharp nationwide rebound post-1970.
-	  </p>
-	  <p>
-		These trends roughly coincide with two important historical events in the history of U.S. immigration: the 1924 Johnson-Reed quota, severely limiting immigration to a select few groups of Europeans; and the 1965 Hart-Cellar Act effectively reversing the quota laws in place since the 20s. Demonstrates the confluence between the economic (the Depression in the 30’s), the military (WWII), and the political (immigration acts), and their role in affecting demographic data.
-	  </p>
-	  <p>
-		Using the distribution of baby names per state in a given year as our predictor yields a rather close fit to the real data. We are excited about the powerful potential in state map visualizations, believe the interactive timeline slider juxtaposing heatmaps with scatter plots in an excellent way to concisely, yet comprehensively, represent our data. 
-	  </p>
-	  <p>
-		(Further Avenues of Exploration) 
-		We hope to expand our predictor’s detail by slicing foreign-born groups into specific regions and predicting these regional distributions. Incorporation of more detailed Census data would be helpful, doubling the number of test observations to score our prediction against. 
-	  </p>
+				Some generalizations can be extracted from this long-term view. Overall, in terms of gross historical migration, the heatmaps indicate a decrease in immigrants from 1910–1970, with a sharp nationwide rebound post-1970.
+		  </p>
+		  <p>
+				These trends roughly coincide with two important historical events in the history of U.S. immigration: the 1924 Johnson-Reed quota, severely limiting immigration to a select few groups of Europeans; and the 1965 Hart-Cellar Act effectively reversing the quota laws in place since the 20s. Demonstrates the confluence between the economic (the Depression in the 30’s), the military (WWII), and the political (immigration acts), and their role in affecting demographic data.
+		  </p>
+		  <p>
+				Using the distribution of baby names per state in a given year as our predictor yields a rather close fit to the real data. We are excited about the powerful potential in state map visualizations, believe the interactive timeline slider juxtaposing heatmaps with scatter plots in an excellent way to concisely, yet comprehensively, represent our data. 
+		  </p>
+		  <p>
+				(Further Avenues of Exploration) 
+				We hope to expand our predictor’s detail by slicing foreign-born groups into specific regions and predicting these regional distributions. Incorporation of more detailed Census data would be helpful, doubling the number of test observations to score our prediction against. 
+		  </p>
     </div>
   </div>
 
