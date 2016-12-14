@@ -21,7 +21,7 @@ svg {
   margin-bottom: 30px;
 }
 
-#line-title {
+#line-title, #year {
   text-align: center;
 }
 
@@ -45,4 +45,44 @@ svg {
 
 text {
   font-family: sans-serif;
+}
+
+.vertline {
+  stroke: #aaa;
+  stroke-dasharray: 5,5;
+  stroke-width: 1px;
+}
+
+.vertlabel {
+  font-size: 11px;
+  fill: #666;
+}
+
+.legendlabel {
+  font-size: 11px;
+  fill: black;
+}
+
+.gradient-rect {
+  stroke: black;
+}
+
+/* TOOPTIP */
+.hidden {
+  display: none;
+}
+
+div.tooltip {
+  color: black;
+  background-color: white;
+  padding: .5em;
+  border-radius: 0px;
+  border-width: thin;
+  border-color: black;
+  border-style: solid;
+  opacity: 1;
+  position: absolute;
+  font-size: 13px;
+  /*text-transform: uppercase;*/
+  text-align: right;
 }
