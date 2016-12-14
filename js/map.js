@@ -72,10 +72,15 @@ MapVis.prototype.initVis = function() {
   var vis = this;
   vis.margin = { top: 0, right: 0, bottom: 0, left: 0 };
 
-  vis.width = 960 - vis.margin.left - vis.margin.right;
-  vis.height = 500 - vis.margin.top - vis.margin.bottom;
+  vis.width = $("#"+vis.parentElement).width() - vis.margin.left - vis.margin.right;
+  vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
-  vis.path = d3.geo.path();
+  vis.m = d3.geo.albersUsa()
+    .scale(600)
+    // .center([-60.439235,20.830666]);  // centers map at given coordinates
+    .translate([vis.width / 2, vis.height / 2]);
+
+  vis.path = d3.geo.path().projection(vis.m);
 
   vis.color = d3.scale.linear()
     .domain([0,27])

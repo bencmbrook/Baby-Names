@@ -6,10 +6,10 @@ LineVis = function(_parentElement){
 
 LineVis.prototype.initVis = function() {
   var vis = this;
-  vis.margin = { top: 10, right: 0, bottom: 40, left: 30 };
+  vis.margin = { top: 1, right: 0, bottom: 20, left: 30 };
 
-  vis.width = 960 - vis.margin.left - vis.margin.right;
-  vis.height = 500 - vis.margin.top - vis.margin.bottom;
+  vis.width = $("#"+vis.parentElement).width() - vis.margin.left - vis.margin.right;
+  vis.height = 350 - vis.margin.top - vis.margin.bottom;
 
   // Set ranges
   vis.x = d3.scale.linear().range([0, vis.width]);
