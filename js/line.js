@@ -6,10 +6,10 @@ LineVis = function(_parentElement){
 
 LineVis.prototype.initVis = function() {
   var vis = this;
-  vis.margin = { top: 1, right: 0, bottom: 20, left: 30 };
+  vis.margin = { top: 1, right: 0, bottom: 20, left: 50 };
 
   vis.width = $("#"+vis.parentElement).width() - vis.margin.left - vis.margin.right;
-  vis.height = 350 - vis.margin.top - vis.margin.bottom;
+  vis.height = 360 - vis.margin.top - vis.margin.bottom;
 
   // Set ranges
   vis.x = d3.scale.linear().range([0, vis.width]);
@@ -17,15 +17,17 @@ LineVis.prototype.initVis = function() {
 
   // Define the axes
   vis.xAxis = d3.svg.axis().scale(vis.x)
-      .orient("bottom").ticks(5);
+      .orient("bottom").ticks(5)
+      .tickFormat(d3.format("d"));
 
   vis.yAxis = d3.svg.axis().scale(vis.y)
-      .orient("left").ticks(5);
+      .orient("left").ticks(5)
+      .tickFormat(d3.format(".0%"));
 
   // Define the line
   vis.valueline = d3.svg.line()
-    .x(function(d, i) { return vis.x(i); })
-    .y(function(d) { return vis.y(d.PercentForeign); });
+    .x(function(d, i) { return vis.x(i + 1910); })
+    .y(function(d) { return vis.y(d.PercentForeign / 100); });
 
   // Adds the svg canvas
   vis.svg = d3.select("#"+vis.parentElement)
@@ -52,8 +54,8 @@ LineVis.prototype.initVis = function() {
     vis.data = vis.allData.MA;
 
     // Scale the range of the data
-    vis.x.domain(d3.extent(vis.data, function(d, i) { return i; }));
-    vis.y.domain([0, d3.max(vis.data, function(d) { return d.PercentForeign; })]);
+    vis.x.domain(d3.extent(vis.data, function(d, i) { return i + 1910; }));
+    vis.y.domain([0, d3.max(vis.data, function(d) { return d.PercentForeign / 100; })]);
 
     // Add the valueline path.
     vis.svg.append("path")
@@ -83,8 +85,8 @@ LineVis.prototype.updateVis = function(stateName) {
   vis.data = vis.allData[stateName];
 
   // Scale the range of the data again
-  vis.x.domain(d3.extent(vis.data, function(d, i) { return i; }));
-  vis.y.domain([0, d3.max(vis.data, function(d) { return d.PercentForeign; })]);
+  vis.x.domain(d3.extent(vis.data, function(d, i) { return i + 1910; }));
+  vis.y.domain([0, d3.max(vis.data, function(d) { return d.PercentForeign / 100; })]);
 
   // Select the section we want to apply our changes to
   vis.svg = d3.select("#"+vis.parentElement).transition();
