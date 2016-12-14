@@ -61,52 +61,59 @@ states_hash =
     'Wyoming': 'WY'
   };
 
-var width = 960,
-  height = 500;
+MapVis = function(_eventHandler){
+	this.eventHandler = _eventHandler;
 
-var radius = d3.scale.sqrt()
-  .domain([0, 1e6])
-  .range([0, 10]);
+	this.initVis();
+};
 
-var path = d3.geo.path();
+MapVis.prototype.initVis = function() {
+  var vis = this;
+  vis.margin = { top: 0, right: 0, bottom: 0, left: 0 };
 
-var color = d3.scale.linear()
-  .domain([0,27])
-  .interpolate(d3.interpolateRgb)
-  .range(['white', 'orange']);
+  vis.width = 960 - vis.margin.left - vis.margin.right;
+  vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
-var svg = d3.select("#map-area").append("svg")
-  .attr("width", width)
-  .attr("height", height);
+  vis.path = d3.geo.path();
 
-queue()
-  .defer(d3.json, "data/us-states.json")
-  .defer(d3.json, "data/pred.json")
-  .await(ready);
+  vis.color = d3.scale.linear()
+    .domain([0,27])
+    .interpolate(d3.interpolateRgb)
+    .range(['white', 'orange']);
 
-function ready(error, us, pred) {
-  var states_data = us.features;
+  vis.svg = d3.select("#map-area").append("svg")
+    .attr("width", vis.width)
+    .attr("height", vis.height);
 
-  svg.selectAll("states")
-    .data(states_data)
-    .enter().insert("path", ".graticule")
-    .attr("class", "states")
-    .attr("fill", function(d) {
-      state_code = states_hash[d.properties.name];
-      if (state_code === "PR") { return "white"; }
-      else {
-        state_pred = pred[state_code]['0'].PercentForeign;
-        return color(state_pred);
-      }
-    })
-    .attr("d", path)
-    .on('mouseover', function(d, i) {
-      var currentState = this;
-      d3.select(this)
-        .style("fill-opacity", "0.5");
-    })
-    .on('mouseout', function(d, i) {
-      d3.selectAll('path')
-        .style("fill-opacity", "1");
-    });
-}
+  queue()
+    .defer(d3.json, "data/us-states.json")
+    .defer(d3.json, "data/pred.json")
+    .await(ready);
+
+  function ready(error, us, pred) {
+    vis.data = us.features;
+
+    vis.svg.selectAll("states")
+      .data(vis.data)
+      .enter().insert("path", ".graticule")
+      .attr("class", "states")
+      .attr("fill", function(d) {
+        state_code = states_hash[d.properties.name];
+        if (state_code === "PR") { return "white"; }
+        else {
+          state_pred = pred[state_code]['0'].PercentForeign;
+          return vis.color(state_pred);
+        }
+      })
+      .attr("d", vis.path)
+      .on('mouseover', function(d, i) {
+        var currentState = this;
+        d3.select(this)
+          .style("fill-opacity", "0.5");
+      })
+      .on('mouseout', function(d, i) {
+        d3.selectAll('path')
+          .style("fill-opacity", "1");
+      });
+  }
+};
