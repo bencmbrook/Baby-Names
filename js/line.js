@@ -65,6 +65,7 @@ LineVis.prototype.initVis = function() {
 
     // Use MA to start
     vis.data = vis.allData.MA;
+    vis.dataY = vis.allY.MA;
 
     // Scale the range of the data
     vis.x.domain(d3.extent(vis.data, function(d, i) { return i + 1910; }));
@@ -115,6 +116,21 @@ LineVis.prototype.initVis = function() {
         .attr("class", "y axis")
         .call(vis.yAxis);
 
+    // Add scatter circles
+    vis.svg.selectAll(".circle")
+      .data(vis.dataY)
+      .enter()
+      .append("circle")
+      .attr("class", "circle")
+      .attr("r", 3)
+      .attr("cx", function(d, i) {
+        return vis.x(i*10 + 1910);
+      })
+      .attr("cy", function(d, i) {
+        return vis.y(d.PercentForeign / 100);
+      })
+      .attr("fill", "black");
+
     vis.updateVis("MA");
   }
 };
@@ -124,22 +140,38 @@ LineVis.prototype.updateVis = function(stateName) {
 
   // Get data for this state
   vis.data = vis.allData[stateName];
+  vis.dataY = vis.allY[stateName];
 
   // Scale the range of the data again
   vis.x.domain(d3.extent(vis.data, function(d, i) { return i + 1910; }));
   vis.y.domain([0, d3.max(vis.data, function(d) { return d.PercentForeign / 100; })]);
 
   // Select the section we want to apply our changes to
-  vis.svg = d3.select("#"+vis.parentElement).transition();
+  vis.select = d3.select("#"+vis.parentElement).transition();
 
   // Make the changes
-  vis.svg.select(".line")   // change the line
+  vis.select.select(".line")   // change the line
       .duration(750)
       .attr("d", vis.valueline(vis.data));
-  vis.svg.select(".x.axis") // change the x axis
+  vis.select.select(".x.axis") // change the x axis
       .duration(750)
       .call(vis.xAxis);
-  vis.svg.select(".y.axis") // change the y axis
+  vis.select.select(".y.axis") // change the y axis
       .duration(750)
       .call(vis.yAxis);
+
+  // Data join
+  var circle = vis.svg.selectAll(".circle")
+    .data(vis.dataY);
+
+  // Enter + Update
+  circle.transition()
+    .duration(750)
+    .attr("class", "circle")
+    .attr("cx", function(d, i) {
+      return vis.x(i*10 + 1910);
+    })
+    .attr("cy", function(d, i) {
+      return vis.y(d.PercentForeign / 100);
+    });
 };
