@@ -211,6 +211,7 @@ MapVis.prototype.initVis = function() {
 MapVis.prototype.updateVis = function(year) {
   var vis = this;
 
+  // Update colors
   vis.svg.selectAll(".states")
     .transition()
     .duration(500)
@@ -221,5 +222,23 @@ MapVis.prototype.updateVis = function(year) {
         state_pred = (vis.data[state_code][year].PercentForeign) / 100;
         return vis.color(state_pred);
       }
+    });
+
+  // Update tooltip
+  vis.svg.selectAll(".states")
+    .on('mousemove', function(d) {
+      // Get mouse position for drawing tooltip
+      var mouse = d3.mouse(vis.svg.node()).map(function(d) { return +d; });
+
+      // Construct HTML string for Tooltip
+      var state_code = states_hash[d.properties.name];
+      var htmlStr = d.properties.name + ": " +
+        (vis.data[state_code][year].PercentForeign).toFixed(2) + "%";
+
+      // Construct tooltip div
+      vis.tip.classed('hidden', false)
+        .attr('style', 'right:' + (vis.width - mouse[0] + 15) +
+              'px; bottom:' + (vis.height - mouse[1] + 65) + 'px')
+        .html( htmlStr );
     });
 };
