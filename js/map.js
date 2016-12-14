@@ -75,17 +75,21 @@ MapVis.prototype.initVis = function() {
   vis.width = $("#"+vis.parentElement).width() - vis.margin.left - vis.margin.right;
   vis.height = 302 - vis.margin.top - vis.margin.bottom;
 
+  vis.pallete = {
+    "color1" : "white",
+    "color2" : "orange"
+  };
+
+  // Tooltip
+  vis.tip = d3.select('#'+vis.parentElement).append('div')
+    .attr('class', 'hidden tooltip');
+
+  // Generate projection of map polygons
   vis.m = d3.geo.albersUsa()
     .scale(600)
-    // .center([-60.439235,20.830666]);  // centers map at given coordinates
-    .translate([vis.width / 2, vis.height / 2]);
+    .translate([vis.width / 1.9, vis.height / 2]);
 
   vis.path = d3.geo.path().projection(vis.m);
-
-  vis.color = d3.scale.linear()
-    .domain([0,27])
-    .interpolate(d3.interpolateRgb)
-    .range(['white', 'orange']);
 
   vis.svg = d3.select("#"+vis.parentElement).append("svg")
     .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -100,30 +104,104 @@ MapVis.prototype.initVis = function() {
     vis.features = us.features;
     vis.data = pred;
 
+    // Turn state data into big array for domain processing
+    vis.dataArray = $.map(pred, function(obj, state) {
+      return $.map(obj, function(value, index) {
+        return [value];
+      });
+    });
+
+    // Build color scale
+    vis.color = d3.scale.linear()
+      .domain([0, d3.max(vis.dataArray, function(d) { return d.PercentForeign / 100; })])
+      .interpolate(d3.interpolateRgb)
+      .range([vis.pallete.color1, vis.pallete.color2]);
+
+    // Add legend
+    var g_x = 1,
+        g_width = 15,
+        g_y = 15,
+        g_height = vis.height - g_y - 70;
+
+    var gradient = vis.svg.append("defs")
+      .append("linearGradient")
+        .attr("id", "gradient")
+        .attr("x1", "0%")
+        .attr("y1", "100%")
+        .attr("x2", "0%")
+        .attr("y2", "0%")
+        .attr("spreadMethod", "pad");
+    gradient.append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", vis.pallete.color1)
+      .attr("stop-opacity", 1);
+    gradient.append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", vis.pallete.color2)
+      .attr("stop-opacity", 1);
+    vis.svg.append("rect")
+      .attr("class", "gradient-rect")
+      .attr("x", g_x)
+      .attr("y", g_y)
+      .attr("width", g_width)
+      .attr("height", g_height)
+      .attr("fill", "url(#gradient)");
+
+    // Add legend numbers
+    vis.svg.append("text")
+        .attr("class", "legendlabel")
+        .attr("x", g_width + 5)
+        .attr("y", g_height + g_y)
+        .text('0%');
+
+    vis.max = d3.max(vis.dataArray, function(d) {return d.PercentForeign;});
+    vis.svg.append("text")
+        .attr("class", "legendlabel")
+        .attr("x", g_width + 5)
+        .attr("y", g_y + 9)
+        .text( Math.round(vis.max) + "%" );
+
+    // Draw map
     var states = vis.svg.selectAll(".states")
       .data(vis.features)
       .enter().insert("path", ".graticule")
       .attr("class", "states")
       .attr("d", vis.path)
-      .on('mouseover', function(d, i) {
-        var currentState = this;
-        d3.select(this)
-          .style("fill-opacity", "0.5");
-      })
-      .on('mouseout', function(d, i) {
-        d3.selectAll('path')
-          .style("fill-opacity", "1");
-      })
       .on('click', function(d, i) {
         $(vis.eventHandler).trigger("stateSelected", states_hash[d.properties.name]);
       })
       .attr("fill", function(d) {
-        state_code = states_hash[d.properties.name];
+        var state_code = states_hash[d.properties.name];
         if (state_code === "PR") { return "white"; }
         else {
-          state_pred = vis.data[state_code]['0'].PercentForeign;
+          state_pred = (vis.data[state_code]['0'].PercentForeign) / 100;
           return vis.color(state_pred);
         }
+      })
+      .on('mousemove', function(d) {
+        // Get mouse position for drawing tooltip
+        var mouse = d3.mouse(vis.svg.node()).map(function(d) { return +d; });
+
+        // Construct HTML string for Tooltip
+        var state_code = states_hash[d.properties.name];
+        var htmlStr = d.properties.name + ": " +
+          (vis.data[state_code]['0'].PercentForeign).toFixed(2) + "%";
+
+        // Construct tooltip div
+        vis.tip.classed('hidden', false)
+          .attr('style', 'right:' + (vis.width - mouse[0] + 15) +
+                'px; bottom:' + (vis.height - mouse[1] + 65) + 'px')
+          .html( htmlStr );
+      })
+      // Hide tooltip on mouseout
+      .on('mouseout', function() {
+        vis.tip.classed('hidden', true);
+        d3.selectAll('path')
+          .style("fill-opacity", "1");
+      })
+      .on('mouseover', function(d, i) {
+        d3.select(this)
+          .style("fill-opacity", "0.5");
       });
 
     vis.updateVis(0);
@@ -140,7 +218,7 @@ MapVis.prototype.updateVis = function(year) {
       state_code = states_hash[d.properties.name];
       if (state_code === "PR") { return "white"; }
       else {
-        state_pred = vis.data[state_code][year].PercentForeign;
+        state_pred = (vis.data[state_code][year].PercentForeign) / 100;
         return vis.color(state_pred);
       }
     });

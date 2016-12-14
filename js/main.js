@@ -29,6 +29,7 @@ d3.select('#slider').call(
     .step(1)
     .on("slide", function(_, year) {
       MapVis.updateVis(year-1910);
+      $("#year").text(year);
     })
 );
 
