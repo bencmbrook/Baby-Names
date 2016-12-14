@@ -61,7 +61,8 @@ states_hash =
     'Wyoming': 'WY'
   };
 
-MapVis = function(_eventHandler){
+MapVis = function(_parentElement, _eventHandler){
+  this.parentElement = _parentElement;
 	this.eventHandler = _eventHandler;
 
 	this.initVis();
@@ -81,7 +82,7 @@ MapVis.prototype.initVis = function() {
     .interpolate(d3.interpolateRgb)
     .range(['white', 'orange']);
 
-  vis.svg = d3.select("#map-area").append("svg")
+  vis.svg = d3.select("#"+vis.parentElement).append("svg")
     .attr("width", vis.width)
     .attr("height", vis.height);
 
@@ -114,6 +115,9 @@ MapVis.prototype.initVis = function() {
       .on('mouseout', function(d, i) {
         d3.selectAll('path')
           .style("fill-opacity", "1");
+      })
+      .on('click', function(d, i) {
+        $(vis.eventHandler).trigger("stateSelected", states_hash[d.properties.name]);
       });
   }
 };

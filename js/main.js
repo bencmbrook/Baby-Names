@@ -12,6 +12,8 @@
 
 var eventHandler = {};
 var countVis = new MapVis("map-area", eventHandler);
-$(eventHandler).bind("click", function() {
-  
+
+// Listen for onclick event on state
+$(eventHandler).bind("stateSelected", function(_, state) {
+  console.log(state);
 });
