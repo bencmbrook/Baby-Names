@@ -49,7 +49,7 @@
           <figcaption class="figure-caption">Figure 1. Normalized stacked area graphs of the 7 male and 10 female names from 1880 to 2013 that ranked as <em>the</em> most popular name at least once. <em>Please keep in mind that the stacked nature of the graphs means the legend is in mirrored order to the graphs.</em></figcaption>
         </figure>
       <p>
-        The "singularly" most popular graph (as opposed to the larger, "top 5" graph) does an excellent job of capturing the salient facts about the dataset without overcomplicating its presentation of these points. FThe most evident point is the greater amount of inherent individuality in girls' names than boys. The fact that 10, rather than 7 names make up the most popular for girls is one indicator. Another notable point is the high degree of volatiltiy with which these popularities change for girls; in other words, girls' names are much more subject to fads and trends. Additionally, with the exception of Noah and Jacob, the most popular male names reach back to the beginning of the time series, and remained close to their starting relative prportions for decades. Girls' names, on the other hand, have a much more varied history, with some names (like Emma) even going out of fashion before experience a contemporary resurgence. On the opposite end, names like Linda have been effectively "fossilized," with its boom and bust period occuring between 1930 and 1970.
+        The "singularly" most popular graph (as opposed to the larger, "top 5" graph) does an excellent job of capturing the salient facts about the dataset without overcomplicating its presentation of these points. FThe most evident point is the greater amount of inherent individuality in girls' names than boys. The fact that 10, rather than 7 names make up the most popular for girls is one indicator. Another notable point is the high degree of volatiltiy with which these popularities change for girls; in other words, girls' names are much more subject to fads and trends. Additionally, with the exception of Noah and Jacob, the most popular male names reach back to the beginning of the time series, and remained close to their starting relative prportions for decades. Girls' names, on the other hand, have a much more varied history, with some names (like Emma) even going out of fashion before experience a contemporary resurgence. There is a clear preponderance of the name Mary during the earliest section of the time series (from 1880–1930). Successive waves of name fads (Linda, Lisa, Jennifer, Jessica, Ashley) deal blow after blow to Mary, until she is nothing but a husk of a name by the 1980s. Many of Mary's opponents, like Linda, have been effectively "fossilized," with Linda's boom and bust period occuring between 1930 and 1970 (for Ashley, Jennifer, and Jessica, their periods of popularity have just ended). Up-and-comers like Isabella and Sophia seem likely to dislodge the remaining footholds of the out-of-fashion names.
       </p>
       <p>
         The graph based on the top 5 most popular names nevertheless is useful for providing a more macroscopic view on these trends. These graphs are a strong reflection of the prior "top 1" trends: the men exhibit the dominant stability of a few names over time, while the women have a much more colorful and dyanmically-changing bank of names to choose from. As a whole, these top 5 graphs are primarily helpful in confirming the two primary observations from above: (1) that the distribution of names becomes increasingly heterogeneous over time, reflecting increased cultura and racial diversity; and (2) that women's names are generally more varied and subject to stronger swings in popularity.
@@ -86,18 +86,24 @@
   <div class="row">
     <div class="col-md-12">
       <h2>Results</h2>
-      <p>
-				Our calculated predictions can be classified along two principle dimensions: geographic and temporal.  This necessitates a multimedia approach to representing the data. In order to better visualize the results, Tableau Analytics were utilized (fig. 3). Annual nationwide heatmaps of our predictions were generated, allowing geographic comparison. Each of these heatmaps has been layered into a combined timeline, which best illustrates the time-varying aspect of the data.  A light-to-dark blue gradient was chosen, with extremes set at 0 and 30%. This gradient colors each state according to the share of foreigners in the registered population for each year. Fig. 4 was instrumental in quantitatively comparing our predictions and test sets. The multi-state analysis (NY, CA, FL, TX) afforded more granularity than the state visualizations alone, for example in calculating the model’s predictive errors for each decade. To validate these observations, we relied on historical precedent to help qualitatively frame the data.
+       <p>
+                Our calculated predictions can be classified along two principle dimensions: geographic and temporal.  This necessitates a multimedia approach to representing the data. In order to better visualize the results, a multi-panel animation was constructed. Annual nationwide heatmaps of our predictions were generated, allowing geographic comparison. Each of these heatmaps has been layered into a combined timeline, which best illustrates the time-varying aspect of the data. This timeline is interactive, and a specific interpolation date can be set by dragging the slider across the timeline. A light-to-dark orange gradient was chosen, with extremes set at 0 and 30%. This gradient colors each state according to the share of foreigners in the registered population for each year. This figure was instrumental in quantitatively comparing our predictions and test sets. The multi-state analysis afforded more granularity than looking at each state one-by-one; in this way, we gained insight into the <em>regional</em> trends and variations and immigration. 
       </p>
       <p>
-				Some generalizations can be extracted from this long-term view. Overall, in terms of gross historical migration, the heatmaps indicate a decrease in immigrants from 1910–1970, with a sharp nationwide rebound post-1970.
-		  </p>
-		  <p>
-				These trends roughly coincide with two important historical events in the history of U.S. immigration: the 1924 Johnson-Reed quota, severely limiting immigration to a select few groups of Europeans; and the 1965 Hart-Cellar Act effectively reversing the quota laws in place since the 20s. Demonstrates the confluence between the economic (the Depression in the 30’s), the military (WWII), and the political (immigration acts), and their role in affecting demographic data.
-		  </p>
-		  <p>
-				Using the distribution of baby names per state in a given year as our predictor yields a rather close fit to the real data. We are excited about the powerful potential in state map visualizations, believe the interactive timeline slider juxtaposing heatmaps with scatter plots in an excellent way to concisely, yet comprehensively, represent our data.
-		  </p>
+        [DISCUSS LINE PLOT PREDICTIONS AND THEIR PURPOSE]
+      </p>
+      <p>
+                Some generalizations can be extracted from this long-term view. Overall, in terms of gross historical migration, the heatmaps indicate a decrease in immigrants from 1910–1970, with a sharp nationwide rebound post-1970.
+          </p>
+          <p>
+                To further validate these observations, we relied on historical precedent to help qualitatively frame the data. These trends roughly coincide with two important historical events in the history of U.S. immigration: the 1924 Johnson-Reed quota, severely limiting immigration to a select few groups of Europeans; and the 1965 Hart-Cellar Act effectively reversing the quota laws in place since the 20s. Demonstrates the confluence between the economic (the Depression in the 30’s), the military (WWII), and the political (immigration acts), and their role in affecting demographic data.
+          </p>
+          <p>
+                Using the distribution of baby names per state in a given year as our predictor yields a rather close fit to the real data. We are excited about the powerful potential in state map visualizations, believe the interactive timeline slider juxtaposing heatmaps with scatter plots in an excellent way to concisely, yet comprehensively, represent our data.
+          </p>
+      <p>
+       [STATE-SPECIFIC DISCUSSION]
+      </p>
     </div>
   </div>
 
