@@ -12,10 +12,11 @@
 
 var eventHandler = {};
 var MapVis = new MapVis("map-area", eventHandler);
+var LineVis = new LineVis("line-area");
 
 // Listen for onclick event on state
-$(eventHandler).bind("stateSelected", function(_, state) {
-  console.log(state);
+$(eventHandler).bind("stateSelected", function(_, stateName) {
+  LineVis.updateVis(stateName);
 });
 
 // Slider

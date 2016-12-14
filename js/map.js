@@ -83,8 +83,8 @@ MapVis.prototype.initVis = function() {
     .range(['white', 'orange']);
 
   vis.svg = d3.select("#"+vis.parentElement).append("svg")
-    .attr("width", vis.width)
-    .attr("height", vis.height);
+    .attr("width", vis.width + vis.margin.left + vis.margin.right)
+    .attr("height", vis.height + vis.margin.left + vis.margin.right);
 
   queue()
     .defer(d3.json, "data/us-states.json")
