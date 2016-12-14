@@ -1,0 +1,16 @@
+/* MAP */
+.states {
+    stroke: #333;
+    fill-opacity: 1;
+}
+
+.symbol {
+    fill: steelblue;
+    fill-opacity: .8;
+    stroke: #fff;
+}
+
+svg {
+  display: block;
+  margin: 0 auto;
+}
