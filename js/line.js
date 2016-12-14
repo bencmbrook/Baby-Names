@@ -173,5 +173,8 @@ LineVis.prototype.updateVis = function(stateName) {
     })
     .attr("cy", function(d, i) {
       return vis.y(d.PercentForeign / 100);
+    })
+    .attr("fill-opacity", function(d, i) {
+      return d.PercentForeign > 0 ? 1 : 0;
     });
 };
