@@ -16,5 +16,16 @@ var MapVis = new MapVis("map-area", eventHandler);
 // Listen for onclick event on state
 $(eventHandler).bind("stateSelected", function(_, state) {
   console.log(state);
-  MapVis.updateVis(100);
 });
+
+// Slider
+d3.select('#slider').call(
+  d3.slider()
+    .axis(true)
+    .min(1910)
+    .max(2014)
+    .step(1)
+    .on("slide", function(_, year) {
+      MapVis.updateVis(year-1910);
+    })
+);
