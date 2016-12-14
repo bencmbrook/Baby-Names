@@ -73,9 +73,9 @@ var path = d3.geo.path();
 // var color = d3.scale.Sequential(d3.interpolatePiYG);
 
 var color = d3.scale.linear()
-  .domain([0,20])
+  .domain([0,27])
   .interpolate(d3.interpolateRgb)
-  .range(['black', 'white']);
+  .range(['white', 'orange']);
 
 var svg = d3.select("#map-area").append("svg")
   .attr("width", width)
@@ -89,28 +89,30 @@ queue()
   .await(ready);
 
 function ready(error, us, centroid, pred) {
-  // var countries = topojson.feature(us, us.objects.states).features;
-  var countries = us.features;
+  // var states_data = topojson.feature(us, us.objects.states).features;
+  var states_data = us.features;
   // var neighbors = topojson.neighbors(us.objects.states.geometries);
 
   svg.selectAll("states")
-    .data(countries)
+    .data(states_data)
     .enter().insert("path", ".graticule")
     .attr("class", "states")
     .attr("fill", function(d) {
       state_code = states_hash[d.properties.name];
-      console.log(state_code);
-      return color(d.properties.density);
+      if (state_code === "PR") { return "white"; }
+      else {
+        state_pred = pred[state_code]['0'].PercentForeign;
+        return color(state_pred);
+      }
     })
     .attr("d", path)
     .on('mouseover', function(d, i) {
       var currentState = this;
-      d3.select(this).style('fill-opacity', 1);
+      d3.select(this)
+        .style("fill-opacity", "0.5");
     })
     .on('mouseout', function(d, i) {
       d3.selectAll('path')
-      .style({
-        'fill-opacity':0.7
-      });
+        .style("fill-opacity", "1");
     });
 }
