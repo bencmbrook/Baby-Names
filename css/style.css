@@ -21,8 +21,12 @@ svg {
   margin-bottom: 30px;
 }
 
+#line-title {
+  text-align: center;
+}
+
 .line {
-  stroke: steelblue;
+  stroke: orange;
   stroke-width: 2;
   fill: none;
 }
@@ -33,4 +37,12 @@ svg {
     stroke: grey;
     stroke-width: 1;
     shape-rendering: crispEdges;
+}
+
+.axis {
+  font-size: 11px;
+}
+
+text {
+  font-family: sans-serif;
 }
