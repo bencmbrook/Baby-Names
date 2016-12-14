@@ -9,7 +9,7 @@ LineVis.prototype.initVis = function() {
   vis.margin = { top: 1, right: 0, bottom: 20, left: 50 };
 
   vis.width = $("#"+vis.parentElement).width() - vis.margin.left - vis.margin.right;
-  vis.height = 360 - vis.margin.top - vis.margin.bottom;
+  vis.height = 352 - vis.margin.top - vis.margin.bottom;
 
   // Set ranges
   vis.x = d3.scale.linear().range([0, vis.width]);
@@ -68,6 +68,7 @@ LineVis.prototype.initVis = function() {
         .attr("d", [
           "M"+vis.x(1924)+" 10 V "+vis.y(0),
           "M"+vis.x(1965)+" 10 V "+vis.y(0),
+          "M"+vis.x(1990)+" 10 V "+vis.y(0),
           ]
         );
 
@@ -82,7 +83,13 @@ LineVis.prototype.initVis = function() {
         .attr("class", "vertlabel")
         .attr("x", vis.x(1965) + 5)
         .attr("y", 20)
-        .text("Repealed");
+        .text("Partial repeal");
+
+    vis.svg.append("text")
+        .attr("class", "vertlabel")
+        .attr("x", vis.x(1990) + 5)
+        .attr("y", 20)
+        .text("Full repeal");
 
     // Add the X Axis
     vis.svg.append("g")
