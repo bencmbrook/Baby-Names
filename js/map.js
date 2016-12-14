@@ -84,11 +84,10 @@ var svg = d3.select("#map-area").append("svg")
 queue()
   // .defer(d3.json, "data/us.json")
   .defer(d3.json, "data/us-states.json")
-  .defer(d3.json, "data/us-state-centroids.json")
   .defer(d3.json, "data/pred.json")
   .await(ready);
 
-function ready(error, us, centroid, pred) {
+function ready(error, us, pred) {
   // var states_data = topojson.feature(us, us.objects.states).features;
   var states_data = us.features;
   // var neighbors = topojson.neighbors(us.objects.states.geometries);
