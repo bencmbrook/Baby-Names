@@ -169,3 +169,7 @@ div.tooltip {
 #header {
   margin-top: 40px;
 }
+
+figure {
+  width: 100%;
+}

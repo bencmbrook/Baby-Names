@@ -98,21 +98,33 @@
 
         <!-- DATA -->
         <div class="row cd-section" id="modeling">
-          <div class="col-md-8 offset-md-2">
-            <h2>Modeling</h2>
-            <p>
-              We started with a simple data frame that contained name counts for states in the US for every year since 1910. We converted this data frame to the predictors data frame. In the new data frame every column contains the count of every name in the original data frame for every decade in a given year.
-            </p>
-            <p>
-              Because of the high dimensionality of the data we considered using both PCA and Lasso for dimension reduction.
-            </p>
-            <h2>PCA</h2>
-            <p>
-              Talk about PCA
-            </p>
-            <p>
-              Talk about Lasso
-            </p>
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+              <h2>Modeling</h2>
+              <p>
+                We started with a simple data frame that contained name counts for states in the US for every year since 1910. We converted this data frame to the predictors data frame. In the new data frame every column contains the count of every name in the original data frame for every decade in a given year.
+              </p>
+              <p>
+                Because of the high dimensionality of the data we considered using both PCA and Lasso for dimension reduction.
+              </p>
+              <h2>PCA</h2>
+              <p>
+                Talk about PCA
+              </p>
+            </div>
+          </div>
+
+          <figure class="figure">
+            <img src="img/explained-variance.png" class="figure-img img-fluid rounded">
+            <figcaption class="figure-caption">Figure 4. Plot of explained variance vs. number of PCA components.</figcaption>
+          </figure>
+
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+              <p>
+                Talk about Lasso
+              </p>
+            </div>
           </div>
         </div>
 
