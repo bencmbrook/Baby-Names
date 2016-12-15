@@ -184,7 +184,10 @@ h1 {
 }
 
 .small {
-  width: 55%;
+  /* same as col-8 offset-2 */
+  width: 66%;
+  margin-left: 16.7%;
+  font-size: 100%;
 }
 
 .inline {
