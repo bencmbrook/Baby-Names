@@ -258,7 +258,6 @@
               <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
               <figcaption class="figure-caption">Figure 3. Plot of model score vs. number of PCA components.</figcaption>
             </figure>
-
             <div class="row">
               <div class="col-md-8 offset-md-2">
                 <p>
@@ -341,7 +340,23 @@
                 <p>
                   Because Lasso also reduces the dimension of the predictors the number of PCA components found above is not necessarily the best fit for this model. We therefore tried tune the alpha parameters for Lasso using different numbers of PCA components. The results are summarised in the following table:
                 </p>
+                <figure class="figure">
+                  <img src="img/lasso_tuning.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
+                  <figcaption class="figure-caption">Figure 8. Lasso R^2 values on test set as function of PCA components and Alpha value.</figcaption>
+                </figure>
               </div>
+
+              <div class="col-md-8 offset-md-2">
+                <h3>Lasso and random forest</h3>
+                <p>
+                  blah blah
+                </p>
+                <figure class="figure">
+                  <img src="img/lasso_tuning.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
+                  <figcaption class="figure-caption">Figure 8. Lasso R^2 values on test set as function of PCA components and Alpha value.</figcaption>
+                </figure>
+              </div>
+
             </div>
 
             <figure class="figure">
@@ -390,8 +405,6 @@
             </p>
             <p>
               Overall, the visualization does an excellent job demonstrating the confluence between the economic, the military, the social, the political, and all of their roles in affecting demographic data.
-            </p>
-            <p>
               While our predictions fit the general trends well, there are some specific corner cases where the model fails to effectively capture the data.
               [NY: "good fit," the 'early-adopter' example]
               [TX: "good fit,"" the 'border-state' example]
