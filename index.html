@@ -118,15 +118,15 @@
                   We first had to determine to how many PCA components we need to reduce our predictors. To achieve this goal we plotted a graph of explained variance as a function of number of PCA components.
                 </p>
                 <figure class="figure">
-                  <img src="img/Randomforest_num_trees_tuning.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
-                  <figcaption class="figure-caption">Figure 4. Plot of model score vs. number of trees in random forest .</figcaption>
+                  <img src="img/explained-variance.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
+                  <figcaption class="figure-caption">Figure 4. Plot of explained variance in train set vs. number of PCA components .</figcaption>
                 </figure>
                 <p>
                   In addition, we tested different regression models and graphed each model's performance as a function of PCA components.
                 </p>
                 <figure class="figure">
-                  <img src="img/Randomforest_num_trees_tuning.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
-                  <figcaption class="figure-caption">Figure 4. Plot of model score vs. number of trees in random forest .</figcaption>
+                  <img src="img/all_pca_models.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
+                  <figcaption class="figure-caption">Figure 5. Plot of model score vs. number of trees in random forest .</figcaption>
                 </figure>
                 <p>
                   Although in general it seems that increasing the number of PCA components also increases the R^2 score of the models, both methods seem to agree that 15 PCA components is the minimum number that will not result in a significant decrease in R^2 score. Therefore, we decided to use PCA with 15 components.
@@ -140,11 +140,11 @@
                 </p>
                 <figure class="figure">
                   <img src="img/Randomforest_num_trees_tuning.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
-                  <figcaption class="figure-caption">Figure 4. Plot of model score vs. number of trees in random forest .</figcaption>
+                  <figcaption class="figure-caption">Figure 6. Plot of model score vs. number of trees in random forest .</figcaption>
                 </figure>
                 <figure class="figure">
                   <img src="img/Randomforest_max_features_tuning.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
-                  <figcaption class="figure-caption">Figure 5. Plot of model score vs. max features considered in each split in random forest .</figcaption>
+                  <figcaption class="figure-caption">Figure 7. Plot of model score vs. max features considered in each split in random forest .</figcaption>
                 </figure>
                 <p>
                   It is important to note that the R^2 score of the chosen model only reflects the accuracy of the model on years for which we were able to find cesus data. As mentioned before, this only includes round decades from 1910 to 2010 (1910, 1920, 1930 etc). Therefore, a high R^2 value doesn't necessarily means that the model actually results in an accurate interpolation of foreign born percentages for years without census data.
@@ -154,24 +154,32 @@
                   put graphs of specific countries.
                 </p>
                 <p>
-                  It is possible to note that in some cases the predicted foreign born percentages seem to be inaccurate and don't follow the clearly visible polynomial trend that is apparent in the census data. For that reason, we decided to also try to use Lasso regression that will perhaps result in a smoother more polynomial looking curve.
+                  It is possible to note that in some cases the predicted foreign born percentages seem to be inaccurate and don't follow the clearly visible polynomial trend that is apparent in the census data. For that reason, we decided to also try to use Lasso regression that will perhaps result in a smoother curve with less spikes.
                 </p>
               </div>
 
               <div class="col-md-8 offset-md-2">
                 <h3>Lasso</h3>
                 <p>
-                  Although
+                  Because Lasso also reduces the dimension of the predictors the number of PCA components found above is not necessarily the best fit for this model. We therefore tried tune the alpha parameters for Lasso using different numbers of PCA components. The results are summarised in the following table:
                 </p>
                 <figure class="figure">
-                  <img src="img/Randomforest_num_trees_tuning.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
-                  <figcaption class="figure-caption">Figure 4. Plot of model score vs. number of trees in random forest .</figcaption>
-                </figure>
-                <figure class="figure">
-                  <img src="img/Randomforest_max_features_tuning.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
-                  <figcaption class="figure-caption">Figure 5. Plot of model score vs. max features considered in each split in random forest .</figcaption>
+                  <img src="img/lasso_tuning.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
+                  <figcaption class="figure-caption">Figure 8. Lasso R^2 values on test set as function of PCA components and Alpha value.</figcaption>
                 </figure>
               </div>
+
+              <div class="col-md-8 offset-md-2">
+                <h3>Lasso and random forest</h3>
+                <p>
+                  blah blah
+                </p>
+                <figure class="figure">
+                  <img src="img/lasso_tuning.png" class="figure-img img-fluid rounded", style="float:left; width: 50%">
+                  <figcaption class="figure-caption">Figure 8. Lasso R^2 values on test set as function of PCA components and Alpha value.</figcaption>
+                </figure>
+              </div>
+
             </div>
 
             <div class="row">
