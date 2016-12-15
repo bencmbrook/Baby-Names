@@ -21,10 +21,12 @@
           </div>
         </div>
 
+        <p style="text-align:center;">[start with interactive vis]</p>
+
         <!-- INTRO -->
         <div class="row cd-section" id="intro">
           <div class="col-md-8 offset-md-2">
-            <h2>Intro</h2>
+            <h2>Introduction</h2>
             <p>
               Cultural and societal changes are an undeniable influence on our lives, yet it is so difficult to accurately quantify and track these developments. The principle issue is identifying metrics that appropriately encapsulate such a complex and intractable set of phenomena. Using U.S. baby name and Census country-of-origin data, we seek to find an appropriate proxy for nationwide diversification. Due to the strong ties between one’s name and country of origin, ethnicity, and religion, we believe distribution of baby names over time to be powerful predictors of demographic trends.  After exploration and analysis of the given data as well as existing historical US demographics data, we ultimately decided to build a model to predict the percentage of foreign-born residents using name distributions as predictors.  Using this model, we aim to interpolate the corresponding intercensal data regarding percentage of foreign-born residents in each state population in every year from 1910 to 2014.
             </p>
@@ -41,10 +43,62 @@
                 <p>
                   The raw dataset we were given has a row for every name that has occurred in a given state and given year, for the 50 states and Washington, D.C., and for all years from 1910 to 2014.  The column values are corresponding state,  year, gender of those who were given the name, and the count of people given that name. At first blush, the level of personal detail on each of these babies is very low: in the best case we only know the birth year, state, and gender of an individual. As a result, any analysis reliant on race or ethnicity will need to be indirectly extracted from this data.
                 </p>
-                <p>
-                  Some useful summary statistics can nonetheless be gleaned from these preliminary data. The most popular boys’ and girls’ names of all time are Mary and James: 4,155,282 and 5,105,919 babies cumulatively since 1880, respectively. The most popular gender-ambiguous names change much more frequently, with the top spot going to Leslie in 1945 and Charlie in 2013. We defined a name as gender-ambiguous if its sex ratio was within 40:60 (i.e. no more than 10% away from 50-50 gender distribution). The difference in style between the most popular gender-ambiguous of 1945 and 2013 are emblematic of the increased preference towards individuality and “unique-sounding” names: the runners-up in 1945 were the traditionally-sounding Jackie, Jessie, Frankie, and Gerry. By 2013 these are replaced with Skyler, Dakota, Phoenix, and Justice. The name undergoing the greatest trend effect (i.e. the one with the largest contemporary increase since 1980) is Harper.
+              </div>
+            </div>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Year</th>
+                  <th>Gender</th>
+                  <th>State</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mary</td>
+                  <td>1910</td>
+                  <td>F</td>
+                  <td>AK</th>
+                  <td>14</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Annie</td>
+                  <td>1910</td>
+                  <td>F</td>
+                  <td>AK</td>
+                  <td>12</th>
+                </tr>
+                <tr>
+                  <th scope="row">...</th>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <th scope="row">5647424</th>
+                  <td>Victor</td>
+                  <td>2014</td>
+                  <td>M</td>
+                  <td>WY</th>
+                  <td>5</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="row">
+              <div class="col-md-8 offset-md-2">
+                 <p>
+                  Some useful summary statistics can nonetheless be gleaned from these preliminary data. The most popular boys’ and girls’ names of all time are Mary and James: 4,155,282 and 5,105,919 babies cumulatively since 1980, respectively. The most popular gender-ambiguous names change much more frequently, with the top spot going to Leslie in 1945 and Charlie in 2013. We defined a name as gender-ambiguous if its sex ratio was within 40:60 (i.e. no more than 10% away from 50-50 gender distribution). The difference in style between the most popular gender-ambiguous of 1945 and 2013 are emblematic of the increased preference towards individuality and “unique-sounding” names: the runners-up in 1945 were the traditionally-sounding Jackie, Jessie, Frankie, and Gerry. By 2013 these are replaced with Skyler, Dakota, Phoenix, and Justice. The name undergoing the greatest trend effect (i.e. the one with the largest contemporary increase since 1980) is Harper.
                   <p>
-                    To get some initial idea of the flow of name trends, we created two sets of stacked-area graphs. The graphs plotted the total number of occurrences of each name in each year normalized to that year’s U.S. population size, with number of occurrences on the y-axis and year on the x-axis. This normalization was critical in order to compare the relative share of babies to which a given name corresponds, rather than the absolute number (which is subject to distortion by population growth). The sets were divided by gender and the criterion for including a name on the graph.  The first set was only concerned with names that have been the most popular in a given year - for males, this was only 7 names, as there have only been 7 unique male names to be the most popular in a state in a given year; for females this was 10 unique names.  The second set of graphs instead took the top 5 names in each year, which turned out to be 25 unique names for males and 46 unique names for females.
+                    To get some initial idea of the flow of name trends, we created two sets of stacked-area graphs. The graphs plotted the total number of occurrences of each name in each year normalized to that year’s total births, with number of occurrences on the y-axis and year on the x-axis. This normalization was critical in order to compare the relative share of babies to which a given name corresponds, rather than the absolute number (which is subject to distortion by population growth). The sets were divided by gender and the criterion for including a name on the graph.  The first set was only concerned with names that have been the most popular in a given year - for males, this was only 7 names, as there have only been 7 unique male names to be the most popular in a given year; for females this was 10 unique names.  The second set of graphs instead took the top 5 names in each year, which turned out to be 25 unique names for males and 46 unique names for females.
                   </p>
                 </p>
               </div>
