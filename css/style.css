@@ -128,7 +128,7 @@ div.tooltip {
   opacity: 1;
 }
 #sidebar a.is-selected .cd-dot {
-  background-color: darkgrey;
+  background-color: orange;
 }
 #sidebar .cd-dot {
   position: relative;
