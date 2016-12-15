@@ -319,9 +319,12 @@
                   It is important to note that the R^2 score of the chosen model only reflects the accuracy of the model on years for which we were able to find cesus data. As mentioned before, this only includes round decades from 1910 to 2010 (1910, 1920, 1930 etc). Therefore, a high R^2 value doesn't necessarily means that the model actually results in an accurate interpolation of foreign born percentages for years without census data.
                   For that reason, we also created seperate graphs for a small number of selected states that show all the predictions for all the years, including the years without census data. On the same graph, we also added the census data used to train the model (shown in red):
                 </p>
-                <p>
-                  put graphs of specific countries
-                </p>
+
+                <figure class="figure">
+                  <img src="img/states_rf.png" class="figure-img img-fluid rounded small">
+                  <figcaption class="figure-caption">Figure 8. Lasso and random forests results in New York and California</figcaption>
+                </figure>
+
                 <p>
                   We can see that in some cases the predicted foreign born percentages seem to be inaccurate and don't follow the clearly visible polynomial trend that is apparent in the census data. For that reason, we decided to also try to use Lasso regression on the PCA components because it might result in a smoother curve with less spikes.
                 </p>
