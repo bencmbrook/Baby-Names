@@ -173,3 +173,16 @@ div.tooltip {
 figure {
   width: 100%;
 }
+
+th {
+  font-weight: bold;
+}
+
+h1 {
+  text-align: center;
+}
+
+#visualization {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
