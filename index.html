@@ -166,7 +166,7 @@
               <div class="col-md-8 offset-md-2">
                 <h2>Modeling</h2>
                 <p>
-                  We started with a simple data frame that contained name counts for states in the US for every year since 1910. We converted this data frame to the predictors data frame. In the new data frame every column contains the count of every name in the original data frame for every decade in a given year.
+                  We started with a simple DataFrame that contained name counts for states in the US for every year since 1910. We converted this DataFrame to the predictors DataFrame. In the new DataFrame every column contains the count of every name in the original DataFrame for every decade in a given year.
                 </p>
               </div>
             </div>
@@ -261,7 +261,7 @@
               <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
               <figcaption class="figure-caption">Figure 3. Plot of model score vs. number of PCA components.</figcaption>
             </figure>
-            
+
             <div class="row">
               <div class="col-md-8 offset-md-2">
                 <p>
@@ -390,7 +390,7 @@
               The US remains relatively immigrant-sparse from the aforementioned effects until around 1965, when the Hart-Celler Act effectively reverses the quota laws in place since the 20s. While the bill set a total restriction on the number of allowable visas per year at 170,000, created special categories for preferential candidates to be fast-tracked through the process, and relaxed many of the prohibitions and nationality-based limits. This partial loosening of the immigration laws is evident in the data. While there is a modest revival of immigration rates immediately post-1965, it is concentrated only in areas with high amounts of Hispanic immigration: California, Arizona, New Mexico, Texas, Florida, Illinois, New York. The first four (CA, AZ, NM, TX) are border states; the latter three (FL, IL, NY) have metropolitan centers with large Hispanic populations and consequent ethnic influence (Miami, Chicago, and New York, respectively). The high and consistent levels of Hispanic immigration buoy these states, and we see rebounds in their immigration levels while other regions of the US stay quite homogeneous throughout the 1960s to 1980s.
             </p>
             <p>
-              The final inflexion point comes around 1990, when the government issues the Immigration Act of 1990. The act stipulates that the total allowable number of visas would be increased nearly seven-fold, to 700,000 per year. It would remain at that level for three years, after which it would stabilize to 675,000 per year. The English testing requirement for naturalization was also removed, making it even easier for immigrants to enter the process. This multi-pronged method produced strong results: in the years following the act, especially at the turn of the new millennium (2000), immigration rates skyrocket nationwide. The last two decades of data paint a very different picture than the first two. While high levels of immigration have returned to the US, no longer are they concentrated in the growing Pacific Coast, or the urban centers in New England and the Midwest. For the first time, the entire country is bathed in an orange tint. This is concordant with the way society works today, and the technologies that make immigration possible. Whereas immigration in its earliest days was limited to steamship travel to a select few port cities (i.e. the Northeast and Chicago/Midwest), travel is now much more distributed and it is as easy to put down roots in Kansas as it is in New Jersey.
+              The final inflexion point comes around 1990, when the government issues the Immigration Act of 1990. The act stipulates that the total allowable number of visas would be increased nearly seven-fold, to 700,000 per year. It would remain at that level for three years, after which it would stabilize to 675,000 per year. The English testing requirement for naturalization was also removed, making it even easier for immigrants to enter the process. This multi-pronged method produced strong results: in the years following the act, especially at the turn of the new millennium (2000), immigration rates skyrocket nationwide. The last two decades of data paint a very different picture than the first two. While high levels of immigration have returned to the US, no longer are they concentrated in the growing Pacific Coast, or the urban centers in New England and the Midwest. For the first time, the entire country is bathed in an orange tint. This is concordant with the way society works today, and the technologies that make immigration possible. Whereas immigration in its earliest days was limited to steamship travel to a select few port cities (i.e. the Northeast and Chicago/Midwest), travel is now much more distributed: it is as easy to put down roots in Kansas as it is in New Jersey.
             </p>
             <p>
               Overall, the visualization does an excellent job demonstrating the confluence between the economic, the military, the social, the political, and all of their roles in affecting demographic data.
@@ -400,23 +400,23 @@
               In order to provide the most diverse representation of our results, a small subset of states was selected for in-depth evaluation: New York, Texas, Georgia, Alaska, and Hawaii. These specific examples illustrate the successes and shortcomings of our model.
             </p>
             <p>
-              <h5>New York (NY)</h5>
+            <h5>New York (NY)</h5>
               Example of a good fit state. Fits the "early-adopter" archetype. U-shaped immigation curve (high rates of foreigenrs in the early 1900s, later revival in the postwar boom.)
             </p>
             <p>
-              <h5>Texas (TX)</h5>
+            <h5>Texas (TX)</h5>
              Great fit state, fits the "border-state" archetype, experiences strong increase post-1960 likely due to increased hispanic immigration. 
             </p>
             <p>
-              <h5>Georgia (GA)</h5>
+            <h5>Georgia (GA)</h5>
              Also a well-fit state, fits the "white south" archetype. Very low (to zero) foreigner population shares, only experiencing the post-1990's boom.
             </p>
             <p>
-              <h5>New Mexico (NM)</h5>
+            <h5>New Mexico (NM)</h5>
              Incredibly poor fit, the real Census data for NM follows its neighbors much more closely than the model's predictions do. 
             </p>
             <p>
-              <h5> Alaska (AK) and Hawaii (HI)</h5>
+            <h5> Alaska (AK) and Hawaii (HI)</h5>
              Outliers. We only had Census data starting at 1960; this was unavoidable as the data was only recorded for states, and AK and HI were not admitted to the union until 1959. nearly half the test observations to compare against, these large gaps mean it is incredibly difficult to assess the performance of these two states and to understand why HI in particular deviates so strongly from the actual foreign-born data.
             </p>
           </div>
@@ -425,9 +425,12 @@
         <!-- CONCLUSION -->
         <div class="row cd-section" id="conclusion">
           <div class="col-md-8 offset-md-2">
+          <h2>Conclusion</h2>
             <p>
+              [summarize intent, exploration, model, and results]
               (DISCUSS Further Avenues of Exploration)
               We hope to expand our predictor’s detail by slicing foreign-born groups into specific regions and predicting these regional distributions. Incorporation of more detailed Census data would be helpful, doubling the number of test observations to score our prediction against.
+              [PREDICT ACTUAL BACKGROUND BREAKDOWN, EVEN JUST USING DATA ON RACIAL BACKGROUNDS FOR EACH STATE]
               [DOING A DEEPER DIVE ON THE ARCHETYPAL STATES.] Maybe some way to do a clustering study on the states and see which of them behaves in similar ways over the course of time.
             </p>
           </div>
@@ -443,9 +446,9 @@
               <dd class="col-sm-9 offset-sm-3"><a href="http://www.census.gov/population/www/documentation/twps0081/tables/tab14.csv">Foreigner demographic data: U.S. Census Bureau</a></dd>
 
               <dt class="col-sm-3">Works Referenced</dt>
-              <dd class="col-sm-9">Barucca, Paolo, et al. "Cross-correlations of American baby names." Proceedings of the National Academy of Sciences 112.26 (2015): 7943-7947.</dd>
+              <dd class="col-sm-9">Barucca, Paolo, et al. <a href="http://www.pnas.org/content/112/26/7943.full.pdf">"Cross-correlations of American baby names."</a> Proceedings of the National Academy of Sciences 112.26 (2015): 7943-7947.</dd>
               <dd class="col-sm-9 offset-sm-3">Ewing, Walter A. <a href="https://www.americanimmigrationcouncil.org/sites/default/files/research/opportunity_exclusion_011312.pdf">"Opportunity and Exclusion: A Brief History of U.S. Immigration Policy."</a> Immigration Policy Center, American Immigration Council (January 2012): 1–7.</dd>
-              <dd class="col-sm-9 offset-sm-3">Twenge, Jean M., Emodish M. Abebe, and W. Keith Campbell. "Fitting In or Standing Out: Trends in American parents' choices for children’s names, 1880–2007." Social Psychological and Personality Science 1.1 (2010): 19-25.</dd>
+              <dd class="col-sm-9 offset-sm-3">Twenge, Jean M., Emodish M. Abebe, and W. Keith Campbell. <a href="http://wkeithcampbell.com/wp-content/uploads/2013/08/Twenge-Abebe-Campbell-2010.pdf">"Fitting In or Standing Out: Trends in American parents' choices for children’s names, 1880–2007."</a> Social Psychological and Personality Science 1.1 (2010): 19-25.</dd>
             </dl>
           </div>
         </div>
