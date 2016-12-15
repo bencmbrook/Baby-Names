@@ -301,26 +301,23 @@
                 <p>
                   As seen in the graphs above, random forest results in the highest R^2 values on the test set. Therefore, we continued to tune the parameters for the random forest regressor to choose the n_estimators and max_features parameters that result in the highest R^2 values on the test set. We ran 5 fold cross validation for every n_estimators value between 10 and 500 (with increments of 10). Similarly, we tested values between 2 and 20 (the chosen number of PCA components) for the max_features parameter. We found that for n_estimators=100 and max_features=4 we get the highest R^2 value on the test set (75.9%).
                 </p>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-6">
-                <figure class="figure">
-                  <img src="img/Randomforest_num_trees_tuning.png" class="figure-img img-fluid rounded inline">
-                  <figcaption class="figure-caption">Figure 6. Plot of model score vs. number of trees in random forest.</figcaption>
-                </figure>
-              </div>
-              <div class="col-md-6">
-                <figure class="figure">
-                  <img src="img/Randomforest_max_features_tuning.png" class="figure-img img-fluid rounded inline">
-                  <figcaption class="figure-caption">Figure 7. Plot of model score vs. max features considered in each split in random forest.</figcaption>
-                </figure>
-              </div>
-            </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <figure class="figure">
+                      <img src="img/Randomforest_num_trees_tuning.png" class="figure-img img-fluid rounded">
+                      <figcaption class="figure-caption">Figure 6. Plot of model score vs. number of trees in random forest.</figcaption>
+                    </figure>
+                  </div>
 
-            <div class="row">
-              <div class="col-md-8 offset-md-2">
+                  <div class="col-md-6">
+                    <figure class="figure">
+                      <img src="img/Randomforest_max_features_tuning.png" class="figure-img img-fluid rounded">
+                      <figcaption class="figure-caption">Figure 7. Plot of model score vs. max features considered in each split in random forest.</figcaption>
+                    </figure>
+                  </div>
+                </div>
+
                 <p>
                   It is important to note that the R^2 score of the chosen model only reflects the accuracy of the model on years for which we were able to find cesus data. As mentioned before, this only includes round decades from 1910 to 2010 (1910, 1920, 1930 etc). Therefore, a high R^2 value doesn't necessarily means that the model actually results in an accurate interpolation of foreign born percentages for years without census data.
                   For that reason, we also created seperate graphs for a small number of selected states that show all the predictions for all the years, including the years without census data. On the same graph, we also added the census data used to train the model (shown in red):
@@ -344,7 +341,7 @@
             </div>
 
             <figure class="figure">
-              <img src="img/lasso_tuning.png" class="figure-img img-fluid rounded small">
+              <img src="img/lasso_tuning.png" class="figure-img img-fluid rounded">
               <figcaption class="figure-caption">Figure 8. Lasso R^2 values on test set as function of PCA components and Alpha value.</figcaption>
             </figure>
 
@@ -362,14 +359,13 @@
                 <p>
                   The following graph shows the predicitions for New York and California using Lasso and Random Forest:
                 </p>
+
+                <figure class="figure">
+                  <img src="img/lasso_vs_rf.png" class="figure-img img-fluid rounded small">
+                  <figcaption class="figure-caption">Figure 8. Lasso and random forest results in New York and California</figcaption>
+                </figure>
               </div>
             </div>
-
-            <figure class="figure">
-              <img src="img/lasso_vs_rf.png" class="figure-img img-fluid rounded small">
-              <figcaption class="figure-caption">Figure 8. Lasso and random forest results in New York and California</figcaption>
-            </figure>
-
           </div>
         </div>
 

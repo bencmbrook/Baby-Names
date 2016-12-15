@@ -183,10 +183,6 @@ h1 {
   margin-bottom: 50px;
 }
 
-.small {
-  width: 55%;
-}
-
-.inline {
-  height: 300px;
+figure {
+  width: 100%;
 }
