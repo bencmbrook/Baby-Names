@@ -14,28 +14,33 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-10 offset-xs-1">
-        <!-- TITLE -->
-        <div class="row cd-section" id="header">
-          <div class="col-md-8 offset-md-2">
-            <h1>Foreign Population via Baby Names</h1>
-          </div>
-        </div>
 
-        <!-- INTERACTIVE VISUALIZATION -->
-        <div class="row cd-section" id="predictions">
-          <div class="row">
-            <div class="col-md-6">
-              <!-- MAP VISUALIZATION -->
-              <h4 id="year">1910</h4>
-              <div id="map-area"></div>
-              <div id="slider"></div>
-            </div>
-            <!-- LINE VISUALIZATION -->
-            <div class="col-md-6">
-              <h4 id="line-title">Massachusetts</h2>
-              <div id="line-area"></div>
+        <div class="cd-section" id="predictions">
+          <!-- TITLE -->
+          <div class="row" id="header">
+            <div class="col-md-8 offset-md-2">
+              <h1>Foreign Population via Baby Names</h1>
             </div>
           </div>
+
+          <!-- INTERACTIVE VISUALIZATION -->
+          <figure class="figure" id="visualization">
+            <div class="row">
+              <div class="col-md-6">
+                <!-- MAP VISUALIZATION -->
+                <h4 id="year">1910</h4>
+                <div id="map-area"></div>
+                <div id="slider"></div>
+              </div>
+              <!-- LINE VISUALIZATION -->
+              <div class="col-md-6">
+                <h4 id="line-title">Massachusetts</h2>
+                <div id="line-area"></div>
+              </div>
+            </div>
+            <figcaption class="figure-caption">Visualization of the predicted values for percent foreign population in each state from 1910-2014. Click on any state to view our predictions through time and drag the slider to see the map change through time. Black points on the line graph represent actual census data. Predictions are based entirely on the names of the babies born in that state and year, using a single nationally trained model.</figcaption>
+          </figure>
+
         </div>
 
         <!-- INTRO -->
@@ -390,31 +395,31 @@
           <nav>
             <ul>
               <li>
-                <a href="#predictions" data-number="5">
+                <a href="#predictions" data-number="1">
                   <span class="cd-dot"></span>
                   <span class="cd-label">Our Predictions</span>
                 </a>
               </li>
               <li>
-                <a href="#intro" data-number="1">
+                <a href="#intro" data-number="2">
                   <span class="cd-dot"></span>
                   <span class="cd-label">Introduction</span>
                 </a>
               </li>
               <li>
-                <a href="#exploration" data-number="2">
+                <a href="#exploration" data-number="3">
                   <span class="cd-dot"></span>
                   <span class="cd-label">Exploration</span>
                 </a>
               </li>
               <li>
-                <a href="#modeling" data-number="3">
+                <a href="#modeling" data-number="4">
                   <span class="cd-dot"></span>
                   <span class="cd-label">Modeling</span>
                 </a>
               </li>
               <li>
-                <a href="#results" data-number="4">
+                <a href="#results" data-number="5">
                   <span class="cd-dot"></span>
                   <span class="cd-label">Results</span>
                 </a>
