@@ -251,6 +251,9 @@
             <div class="row">
               <div class="col-md-8 offset-md-2">
                 <h3>PCA</h3>
+                <p>
+                  Due to the high dimensionality of the data, we performed PCA, cross-validating number of components with model score as well as explained variance.  We eventually concluded that 17 was the optimal number of components for the transformation. We then trained different preliminary regression models to predict percentage of foreign-born residents in each state in each year, using only counts of each name in each state as predictors. We eventually selecting Random Forests for its high score on multiple train-test splits.  We cross-validated the number of trees in the forest with the model score, determining that 50 was the optimal number of estimators.
+                </p>
               </div>
             </div>
 
@@ -258,11 +261,9 @@
               <img src="img/forest-pca.png" class="figure-img img-fluid rounded">
               <figcaption class="figure-caption">Figure 3. Plot of model score vs. number of PCA components.</figcaption>
             </figure>
+            
             <div class="row">
               <div class="col-md-8 offset-md-2">
-                <p>
-                  Due to the high dimensionality of the data, we performed PCA, cross-validating number of components with model score as well as explained variance.  We eventually concluded that 17 was the optimal number of components for the transformation. We then trained different preliminary regression models to predict percentage of foreign-born residents in each state in each year, using only counts of each name in each state as predictors. We eventually selecting Random Forests for its high score on multiple train-test splits.  We cross-validated the number of trees in the forest with the model score, determining that 50 was the optimal number of estimators.
-                </p>
                 <p>
                   We first had to determine to how many PCA components we need to reduce our predictors. To achieve this goal we plotted a graph of explained variance as a function of number of PCA components.
                 </p>
@@ -297,7 +298,7 @@
 
             <div class="row">
               <div class="col-md-8 offset-md-2">
-                <h3>Random-Forest tuning</h3>
+                <h3>Random-Forest Tuning</h3>
                 <p>
                   As seen in the graphs above, random forest results in the highest R^2 values on the test set. Therefore, we continued to tune the parameters for the random forest regressor to choose the n_estimators and max_features parameters that result in the highest R^2 values on the test set. We ran 5 fold cross validation for every n_estimators value between 10 and 500 (with increments of 10). Similarly, we tested values between 2 and 20 (the chosen number of PCA components) for the max_features parameter. We found that for n_estimators=100 and max_features=4 we get the highest R^2 value on the test set (75.9%).
                 </p>
@@ -393,11 +394,30 @@
             </p>
             <p>
               Overall, the visualization does an excellent job demonstrating the confluence between the economic, the military, the social, the political, and all of their roles in affecting demographic data.
-              While our predictions fit the general trends well, there are some specific corner cases where the model fails to effectively capture the data.
-              [NY: "good fit," the 'early-adopter' example]
-              [TX: "good fit,"" the 'border-state' example]
-              [GA: "good fit," the 'white South' example]
-              [AK and HI: the outliers]
+              While our predictions fit the general trends well, there are some specific corner cases where the model fails to effectively capture the data. These issues result from some of the inherent limitations in our model. The predictions are made by consciously ignoring the state in which a baby was born; thus, the state-by-state details are backed out from a nationwide model that only takes into account the annual distribution of baby names.
+            </p>
+            <p>
+              In order to provide the most diverse representation of our results, a small subset of states was selected for in-depth evaluation: New York, Texas, Georgia, Alaska, and Hawaii. These specific examples illustrate the successes and shortcomings of our model.
+            </p>
+            <p>
+              <h5>New York (NY)</h5>
+              Example of a good fit state. Fits the "early-adopter" archetype. U-shaped immigation curve (high rates of foreigenrs in the early 1900s, later revival in the postwar boom.)
+            </p>
+            <p>
+              <h5>Texas (TX)</h5>
+             Great fit state, fits the "border-state" archetype, experiences strong increase post-1960 likely due to increased hispanic immigration. 
+            </p>
+            <p>
+              <h5>Georgia (GA)</h5>
+             Also a well-fit state, fits the "white south" archetype. Very low (to zero) foreigner population shares, only experiencing the post-1990's boom.
+            </p>
+            <p>
+              <h5>New Mexico (NM)</h5>
+             Incredibly poor fit, the real Census data for NM follows its neighbors much more closely than the model's predictions do. 
+            </p>
+            <p>
+              <h5> Alaska (AK) and Hawaii (HI)</h5>
+             Outliers. We only had Census data starting at 1960; this was unavoidable as the data was only recorded for states, and AK and HI were not admitted to the union until 1959. nearly half the test observations to compare against, these large gaps mean it is incredibly difficult to assess the performance of these two states and to understand why HI in particular deviates so strongly from the actual foreign-born data.
             </p>
           </div>
         </div>
@@ -405,10 +425,10 @@
         <!-- CONCLUSION -->
         <div class="row cd-section" id="conclusion">
           <div class="col-md-8 offset-md-2">
-            <h2>Conclusions</h2>
             <p>
               (DISCUSS Further Avenues of Exploration)
               We hope to expand our predictor’s detail by slicing foreign-born groups into specific regions and predicting these regional distributions. Incorporation of more detailed Census data would be helpful, doubling the number of test observations to score our prediction against.
+              [DOING A DEEPER DIVE ON THE ARCHETYPAL STATES.] Maybe some way to do a clustering study on the states and see which of them behaves in similar ways over the course of time.
             </p>
           </div>
         </div>
@@ -424,6 +444,7 @@
 
               <dt class="col-sm-3">Works Referenced</dt>
               <dd class="col-sm-9">Barucca, Paolo, et al. "Cross-correlations of American baby names." Proceedings of the National Academy of Sciences 112.26 (2015): 7943-7947.</dd>
+              <dd class="col-sm-9 offset-sm-3">Ewing, Walter A. <a href="https://www.americanimmigrationcouncil.org/sites/default/files/research/opportunity_exclusion_011312.pdf">"Opportunity and Exclusion: A Brief History of U.S. Immigration Policy."</a> Immigration Policy Center, American Immigration Council (January 2012): 1–7.</dd>
               <dd class="col-sm-9 offset-sm-3">Twenge, Jean M., Emodish M. Abebe, and W. Keith Campbell. "Fitting In or Standing Out: Trends in American parents' choices for children’s names, 1880–2007." Social Psychological and Personality Science 1.1 (2010): 19-25.</dd>
             </dl>
           </div>
