@@ -182,14 +182,3 @@ h1 {
   margin-top: 50px;
   margin-bottom: 50px;
 }
-
-.small {
-  /* same as col-8 offset-2 */
-  width: 66%;
-  margin-left: 16.7%;
-  font-size: 100%;
-}
-
-.inline {
-  height: 300px;
-}
