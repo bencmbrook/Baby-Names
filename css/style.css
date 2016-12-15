@@ -170,10 +170,6 @@ div.tooltip {
   margin-top: 40px;
 }
 
-figure {
-  width: 100%;
-}
-
 th {
   font-weight: bold;
 }
@@ -185,4 +181,12 @@ h1 {
 #visualization {
   margin-top: 50px;
   margin-bottom: 50px;
+}
+
+.small {
+  height: 400px;
+}
+
+.inline {
+  height: 300px;
 }
