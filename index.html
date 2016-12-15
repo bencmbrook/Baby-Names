@@ -21,7 +21,22 @@
           </div>
         </div>
 
-        <p style="text-align:center;">[start with interactive vis]</p>
+        <!-- INTERACTIVE VISUALIZATION -->
+        <div class="row cd-section" id="predictions">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- MAP VISUALIZATION -->
+              <h4 id="year">1910</h4>
+              <div id="map-area"></div>
+              <div id="slider"></div>
+            </div>
+            <!-- LINE VISUALIZATION -->
+            <div class="col-md-6">
+              <h4 id="line-title">Massachusetts</h2>
+              <div id="line-area"></div>
+            </div>
+          </div>
+        </div>
 
         <!-- INTRO -->
         <div class="row cd-section" id="intro">
@@ -46,57 +61,60 @@
               </div>
             </div>
 
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Year</th>
-                  <th>Gender</th>
-                  <th>State</th>
-                  <th>Count</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mary</td>
-                  <td>1880</td>
-                  <td>F</td>
-                  <td>AK</th>
-                  <td>14</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Annie</td>
-                  <td>1880</td>
-                  <td>F</td>
-                  <td>AK</td>
-                  <td>12</th>
-                </tr>
-                <tr>
-                  <th scope="row">...</th>
-                  <td>...</td>
-                  <td>...</td>
-                  <td>...</td>
-                  <td>...</td>
-                  <td>...</td>
-                </tr>
-                <tr>
-                  <th scope="row">5647424</th>
-                  <td>Victor</td>
-                  <td>2014</td>
-                  <td>M</td>
-                  <td>WY</th>
-                  <td>5</td>
-                </tr>
-              </tbody>
-            </table>
+            <figure class="figure">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Gender</th>
+                    <th>State</th>
+                    <th>Count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mary</td>
+                    <td>1910</td>
+                    <td>F</td>
+                    <td>AK</th>
+                    <td>14</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Annie</td>
+                    <td>1910</td>
+                    <td>F</td>
+                    <td>AK</td>
+                    <td>12</th>
+                  </tr>
+                  <tr>
+                    <th scope="row">...</th>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5647424</th>
+                    <td>Victor</td>
+                    <td>2014</td>
+                    <td>M</td>
+                    <td>WY</th>
+                    <td>5</td>
+                  </tr>
+                </tbody>
+              </table>
+              <figcaption class="figure-caption">StateNames.csv. Another file, NationalNames.csv, goes back to 1880 but did not include individual states, as will be discussed next.</figcaption>
+            </figure>
 
             <div class="row">
               <div class="col-md-8 offset-md-2">
                  <p>
-                  Some useful summary statistics can nonetheless be gleaned from these preliminary data. The most popular boys’ and girls’ names of all time are Mary and James: 4,155,282 and 5,105,919 babies cumulatively since 1880, respectively. The most popular gender-ambiguous names change much more frequently, with the top spot going to Leslie in 1945 and Charlie in 2013. We defined a name as gender-ambiguous if its sex ratio was within 40:60 (i.e. no more than 10% away from 50-50 gender distribution). The difference in style between the most popular gender-ambiguous of 1945 and 2013 are emblematic of the increased preference towards individuality and “unique-sounding” names: the runners-up in 1945 were the traditionally-sounding Jackie, Jessie, Frankie, and Gerry. By 2013 these are replaced with Skyler, Dakota, Phoenix, and Justice. The name undergoing the greatest trend effect (i.e. the one with the largest contemporary increase since 1980) is Harper.
+                    Some useful summary statistics can nonetheless be gleaned from these preliminary data. The most popular boys’ and girls’ names of all time are Mary and James: 4,155,282 and 5,105,919 babies cumulatively since 1880, respectively. The most popular gender-ambiguous names change much more frequently, with the top spot going to Leslie in 1945 and Charlie in 2013. We defined a name as gender-ambiguous if its sex ratio was within 40:60 (i.e. no more than 10% away from 50-50 gender distribution). The difference in style between the most popular gender-ambiguous of 1945 and 2013 are emblematic of the increased preference towards individuality and “unique-sounding” names: the runners-up in 1945 were the traditionally-sounding Jackie, Jessie, Frankie, and Gerry. By 2013 these are replaced with Skyler, Dakota, Phoenix, and Justice. The name undergoing the greatest trend effect (i.e. the one with the largest contemporary increase since 1980) is Harper.
                   <p>
                     To get some initial idea of the flow of name trends, we created two sets of stacked-area graphs. The graphs plotted the total number of occurrences of each name in each year normalized to that year’s total births, with number of occurrences on the y-axis and year on the x-axis. This normalization was critical in order to compare the relative share of babies to which a given name corresponds, rather than the absolute number (which is subject to distortion by population growth). The sets were divided by gender and the criterion for including a name on the graph.  The first set was only concerned with names that have been the most popular in a given year - for males, this was only 7 names, as there have only been 7 unique male names to be the most popular in a given year; for females this was 10 unique names.  The second set of graphs instead took the top 5 names in each year, which turned out to be 25 unique names for males and 46 unique names for females.
                   </p>
@@ -162,71 +180,73 @@
               </div>
             </div>
 
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>State</th>
-                  <th>Year</th>
-                  <th>Mary_F</th>
-                  <th>Sophia_F</th>
-                  <th>John_M</th>
-                  <th>Robert_M</th>
-                  <th>...</th>
-                  <th>Pablo_M</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">AK</th>
-                  <th scope="row">1910</th>
-                  <td>128</td>
-                  <td>96</td>
-                  <td>85</td>
-                  <td>66</th>
-                  <td>...</td>
-                  <td>8</td>
-                </tr>
-                <tr>
-                  <th scope="row">AK</th>
-                  <th scope="row">1911</th>
-                  <td>160</td>
-                  <td>130</td>
-                  <td>42</td>
-                  <td>78</th>
-                  <td>...</td>
-                  <td>20</td>
-                </tr>
-                <tr>
-                  <th scope="row">...</th>
-                  <th scope="row">...</th>
-                  <td>...</td>
-                  <td>...</td>
-                  <td>...</td>
-                  <td>...</td>
-                  <td>...</td>
-                </tr>
-                <tr>
-                  <th scope="row">WY</th>
-                  <th scope="row">2013</th>
-                  <td>12</td>
-                  <td>34</td>
-                  <td>18</td>
-                  <td>160</th>
-                  <td>...</td>
-                  <td>83</td>
-                </tr>
-                <tr>
-                  <th scope="row">WY</th>
-                  <th scope="row">2014</th>
-                  <td>15</td>
-                  <td>28</td>
-                  <td>15</td>
-                  <td>152</th>
-                  <td>...</td>
-                  <td>77</td>
-                </tr>
-              </tbody>
-            </table>
+            <figure class="figure">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>State</th>
+                    <th>Year</th>
+                    <th>Mary_F</th>
+                    <th>Sophia_F</th>
+                    <th>John_M</th>
+                    <th>Robert_M</th>
+                    <th>...</th>
+                    <th>Pablo_M</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">AK</th>
+                    <th scope="row">1910</th>
+                    <td>128</td>
+                    <td>96</td>
+                    <td>85</td>
+                    <td>66</th>
+                    <td>...</td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">AK</th>
+                    <th scope="row">1911</th>
+                    <td>160</td>
+                    <td>130</td>
+                    <td>42</td>
+                    <td>78</th>
+                    <td>...</td>
+                    <td>20</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">...</th>
+                    <th scope="row">...</th>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">WY</th>
+                    <th scope="row">2013</th>
+                    <td>12</td>
+                    <td>34</td>
+                    <td>18</td>
+                    <td>160</th>
+                    <td>...</td>
+                    <td>83</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">WY</th>
+                    <th scope="row">2014</th>
+                    <td>15</td>
+                    <td>28</td>
+                    <td>15</td>
+                    <td>152</th>
+                    <td>...</td>
+                    <td>77</td>
+                  </tr>
+                </tbody>
+              </table>
+            </figure>
 
             <div class="row">
               <div class="col-md-8 offset-md-2">
@@ -336,28 +356,6 @@
           </div>
         </div>
 
-        <!-- INTERACTIVE VISUALIZATION -->
-        <div class="row cd-section" id="predictions">
-          <div class="row">
-            <div class="col-md-12">
-              <h2>Predictions of Percent Foreign Born</h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <!-- MAP VISUALIZATION -->
-              <h4 id="year">1910</h4>
-              <div id="map-area"></div>
-              <div id="slider"></div>
-            </div>
-            <!-- LINE VISUALIZATION -->
-            <div class="col-md-6">
-              <h4 id="line-title">Massachusetts</h2>
-              <div id="line-area"></div>
-            </div>
-          </div>
-        </div>
-
         <!-- CONCLUSION -->
         <div class="row cd-section" id="conclusion">
           <div class="col-md-8 offset-md-2">
@@ -392,6 +390,12 @@
           <nav>
             <ul>
               <li>
+                <a href="#predictions" data-number="5">
+                  <span class="cd-dot"></span>
+                  <span class="cd-label">Our Predictions</span>
+                </a>
+              </li>
+              <li>
                 <a href="#intro" data-number="1">
                   <span class="cd-dot"></span>
                   <span class="cd-label">Introduction</span>
@@ -413,12 +417,6 @@
                 <a href="#results" data-number="4">
                   <span class="cd-dot"></span>
                   <span class="cd-label">Results</span>
-                </a>
-              </li>
-              <li>
-                <a href="#predictions" data-number="5">
-                  <span class="cd-dot"></span>
-                  <span class="cd-label">Predictions</span>
                 </a>
               </li>
               <li>
