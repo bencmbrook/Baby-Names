@@ -323,38 +323,48 @@
                   For that reason, we also created seperate graphs for a small number of selected states that show all the predictions for all the years, including the years without census data. On the same graph, we also added the census data used to train the model (shown in red):
                 </p>
                 <p>
-                  put graphs of specific countries.
+                  put graphs of specific countries
                 </p>
                 <p>
-                  It is possible to note that in some cases the predicted foreign born percentages seem to be inaccurate and don't follow the clearly visible polynomial trend that is apparent in the census data. For that reason, we decided to also try to use Lasso regression that will perhaps result in a smoother curve with less spikes.
+                  We can see that in some cases the predicted foreign born percentages seem to be inaccurate and don't follow the clearly visible polynomial trend that is apparent in the census data. For that reason, we decided to also try to use Lasso regression on the PCA components because it might result in a smoother curve with less spikes.
                 </p>
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-8 offset-md-2">
-                <h3>Lasso</h3>
+                <h3>Lasso Tuning</h3>
                 <p>
-                  Because Lasso also reduces the dimension of the predictors the number of PCA components found above is not necessarily the best fit for this model. We therefore tried tune the alpha parameters for Lasso using different numbers of PCA components. The results are summarised in the following table:
+                  Because Lasso is also used as a dimension reduction method, the number of PCA components found above is not necessarily the best in this case. We therefore tuned the alpha parameters for Lasso using different numbers of PCA components. The results are summarised in the following table:
                 </p>
-
                 <figure class="figure">
-                  <img src="img/lasso_tuning.png" class="figure-img img-fluid rounded">
-                  <figcaption class="figure-caption">Figure 8. Lasso R^2 values on test set as function of PCA components and Alpha value.</figcaption>
-                </figure>
-
-                <h3>Lasso and random forest</h3>
-                <p>
-                  blah blah
-                </p>
-
-                <figure class="figure">
-                  <img src="img/lasso_tuning.png" class="figure-img img-fluid rounded">
+                  <img src="img/Lasso_tuning.png" class="figure-img img-fluid rounded">
                   <figcaption class="figure-caption">Figure 8. Lasso R^2 values on test set as function of PCA components and Alpha value.</figcaption>
                 </figure>
               </div>
             </div>
 
+            <div class="row">
+              <div class="col-md-8 offset-md-2">
+                <p>
+                  Based on these results, we decided to perform PCA reduction to 140 components before applying Lasso with alpha parameter of 1.
+                </p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8 offset-md-2">
+                <h3>Lasso vs random forest</h3>
+                <p>
+                  The following graph shows the predicitions for New York and California using Lasso and Random Forest:
+                </p>
+
+                <figure class="figure">
+                  <img src="img/lasso_vs_rf.png" class="figure-img img-fluid rounded small">
+                  <figcaption class="figure-caption">Figure 8. Lasso and random forest results in New York and California</figcaption>
+                </figure>
+              </div>
+            </div>
           </div>
         </div>
 
