@@ -173,3 +173,7 @@ div.tooltip {
 figure {
   width: 100%;
 }
+
+th {
+  font-weight: bold;
+}
