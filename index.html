@@ -374,7 +374,7 @@
           </div>
         </div>
 
-        <!-- RESULTS -->
+         <!-- RESULTS -->
         <div class="row cd-section" id="results">
           <div class="col-md-8 offset-md-2">
             <h2>Results</h2>
@@ -401,27 +401,22 @@
               While our predictions fit the general trends well, there are some specific corner cases where the model fails to effectively capture the data. These issues result from some of the inherent limitations in our model. The predictions are made by consciously ignoring the state in which a baby was born; thus, the state-by-state details are backed out from a nationwide model that only takes into account the annual distribution of baby names.
             </p>
             <p>
-              In order to provide the most diverse representation of our results, a small subset of states was selected for in-depth evaluation: New York, Texas, Georgia, Alaska, and Hawaii. These specific examples illustrate the successes and shortcomings of our model.
+              In order to provide the most diverse representation of our results, a small subset of states was selected for in-depth evaluation: New York, Georgia, New Mexico, Alaska, and Hawaii. These specific examples illustrate the successes and shortcomings of our model.
             </p>
             <p>
             <h5>New York (NY)</h5>
-              Example of a good fit state. Fits the "early-adopter" archetype. U-shaped immigation curve (high rates of foreigenrs in the early 1900s, later revival in the postwar boom.)
-            </p>
-            <p>
-            <h5>Texas (TX)</h5>
-             Great fit state, fits the "border-state" archetype, experiences strong increase post-1960 likely due to increased hispanic immigration.
+              New York is an example of state with a moderately good prediction fit over its test values (please refer to <a href="#predictions">Our Predictions</a> for the detailed infra-state line plot). The model captures the early test values well, but fails to pick up on the post-1990s immigration boom. New York fits the archetypal model of an "early-adopter" state. These states are generalized by a U-shaped immigation curve. High rates of foreigenrs in the early 1900s accompanied by a later revival in the postwar boom. Some other states fitting this shape include Illinois, Ohio, Michigan, and Pennsylvania.
             </p>
             <p>
             <h5>Georgia (GA)</h5>
-             Also a well-fit state, fits the "white south" archetype. Very low (to zero) foreigner population shares, only experiencing the post-1990's boom.
-            </p>
+             Georgia demonstrates a strong fit of the predictions against Census test observations. Additionally, the state is a strong candidate for another regional archetype: the "white South." States all across the Southern region exhibit this pattern: Virginia, Kentucky, Tennessee, Nroth Carolina, South Carolina, Georiga, Mississippi, Alabama, Louisiana, and Arkansas (and to a smaller extent Missouri). The trend is characterzied by incredibly low (to zero) rates of immigration throughout the first two thirds of the time series. These states remained very homogeneous during he first era of immigration history with barely perceptible changes after 1965, and only began notable diversification after the post-90s boom in nationwide foreign-born populations. Georgia is a prime example of the white Southern state whose population is relatively isolated and stable, with a recent opening up only occuring in the contemporary period (right around Atlanta's 1996 hosting of the Summer Olympics).
             <p>
             <h5>New Mexico (NM)</h5>
-             Incredibly poor fit, the real Census data for NM follows its neighbors much more closely than the model's predictions do.
+             New Mexico is one of the corner cases where our model really struggles. Its foreign-born shares should be roughly similar to its surrounding neighbors (particularly California, Arizona, and Texas). Indeed, the Census test values follow one another closely, and suggest yet another "Southwest" cluster sharing the common effects of recent, high Hispanic immigration to these border states. However, the model suffers from oversensitivity, with sharp peaks and troughs on the plot across the whole time series. Furthermore, the model consistently overpredicts the test values, altogether adding up to an unreliable set of predictions of this state. These "vertical shifts" of the predictions away from the test values appeared in a handful of other states. Other states sufferiing from this predictive volatility and vertical shifting, but to a lesser extent, include Missouri, Kansas, and Florida. 
             </p>
             <p>
             <h5> Alaska (AK) and Hawaii (HI)</h5>
-             Outliers. We only had Census data starting at 1960; this was unavoidable as the data was only recorded for states, and AK and HI were not admitted to the union until 1959. nearly half the test observations to compare against, these large gaps mean it is incredibly difficult to assess the performance of these two states and to understand why HI in particular deviates so strongly from the actual foreign-born data.
+             Alaska and Hawaii are unique cases for our model. We only had Census data starting at 1960 for these two states. This was unavoidable as foreign-born statistics were historically only recorded for states, and AK and HI were not admitted to the Union until 1959. With nearly half the test observations to compare against missing, these large gaps meant it was difficult to assess the performance of these two states. HI exhibits a similar "vertical shifting," like NM, in its predictions. Nevertheless, given so few observations to validate our predictions, no clear conclusions can be made regarding why HI in particular deviates so strongly from the actual foreign-born data.
             </p>
           </div>
         </div>
@@ -431,11 +426,13 @@
           <div class="col-md-8 offset-md-2">
           <h2>Conclusion</h2>
             <p>
-              [summarize intent, exploration, model, and results]
-              (DISCUSS Further Avenues of Exploration)
-              We hope to expand our predictor’s detail by slicing foreign-born groups into specific regions and predicting these regional distributions. Incorporation of more detailed Census data would be helpful, doubling the number of test observations to score our prediction against.
-              [PREDICT ACTUAL BACKGROUND BREAKDOWN, EVEN JUST USING DATA ON RACIAL BACKGROUNDS FOR EACH STATE]
-              [DOING A DEEPER DIVE ON THE ARCHETYPAL STATES.] Maybe some way to do a clustering study on the states and see which of them behaves in similar ways over the course of time.
+              In conclusion, our model has strong predictive power for at least most states, and suceeeds in our stated goal of fitting a generalized national model to each state to extract out specific immigrant population estimations. While our model fails to accurately predict a handful of states, it nonetheless performs acceptably, and generates a number of interesting impressions demanding some reflection.
+            </p>
+            <p>
+              A primary area of interest for further exploration involves greater ethnic detail on immigration. We hope to expand our predictor’s complexity by slicing foreign-born groups into specific regions and predicting these regional distributions. Incorporation of more detailed Census data would be helpful in this regard, doubling the number of test observations to score our prediction against. By using racial demographic data for each state, we may be able to cross-reference baby name distirbutions with racial breakdowns. This would enhance the granularity of our predictions: instead of just estimating the number of foreigners, we would be able to estime the number of proportion of foreigners who belong to specific nationalities.
+            </p>
+            <p>
+              A secondary thread to pursue revolves around the regional characteristics identifeid in the above-mentioned Results section. These "state archetypes" (early adopters, white South, border states, Northwest settlers, etc.) seem to be strongly linked to the geographical interstate regions. A fruitful field of further study would involved a clustering analysis of the state predictions, to see if any of them behave in specific ways that can be reasonably grouped together into a few categories. These categories could be cross-referened to the qualitative categories extracted from the results analysis, thereby validate/nullifying the initial theories.
             </p>
           </div>
         </div>
